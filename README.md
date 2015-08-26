@@ -27,7 +27,7 @@ This project is still work in progress. There are quite a lot of things need to 
 * Many iOS APIs used in the objective-C version are already deprecated. They need to be replaced with the latest APIs.
 * I encountered some strange crashes in Bolts. Same error as described in [https://github.com/BoltsFramework/Bolts-iOS/issues/102](https://github.com/BoltsFramework/Bolts-iOS/issues/102). I temporarily used the workaround mentioned by [https://github.com/wdcurry](https://github.com/wdcurry).
 * We need @3x images for iPhone 6 Plus (so far I just tested on Simulator iPhone 5s only).
-* 
+* I basically just converted the Objective-C syntax to Swift syntax for most of the code whenever possible. So there are still rooms for improvement to make the code more "Swifty".
 * etc.
 
 ## Misc
