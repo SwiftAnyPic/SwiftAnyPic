@@ -10,8 +10,10 @@ extension String {
     }
     
     func subString(startIndex: Int, length: Int) -> String {
-        let start = advance(self.startIndex, startIndex)
-        let end = advance(self.startIndex, startIndex + length)
+        let start = self.startIndex.advancedBy(startIndex)
+        let end = self.startIndex.advancedBy(startIndex + length)
+//        let start = advance(self.startIndex, startIndex)
+//        let end = advance(self.startIndex, startIndex + length)
         return self.substringWithRange(Range<String.Index>(start: start, end: end))
     }
 }

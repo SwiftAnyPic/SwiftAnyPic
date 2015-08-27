@@ -223,7 +223,7 @@ class PAPUtility {
         PAPCache.sharedCache.setFollowStatus(true, user: user)
     }
 
-    class func followUserEventually(user: PFUser, block completionBlock: ((succeeded: ObjCBool, error: NSError?) -> Void)?) {
+    class func followUserEventually(user: PFUser, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
         if user.objectId == PFUser.currentUser()!.objectId {
             return
         }
@@ -241,7 +241,7 @@ class PAPUtility {
         PAPCache.sharedCache.setFollowStatus(true, user: user)
     }
 
-    class func followUsersEventually(users: [PFUser], block completionBlock: ((succeeded: ObjCBool, error: NSError?) -> Void)?) {
+    class func followUsersEventually(users: [PFUser], block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
         for user: PFUser in users {
             PAPUtility.followUserEventually(user, block: completionBlock)
             PAPCache.sharedCache.setFollowStatus(true, user: user)
