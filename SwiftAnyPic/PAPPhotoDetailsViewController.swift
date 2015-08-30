@@ -208,12 +208,14 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
             comment.saveEventually { (succeeded, error) in
                 timer.invalidate()
                 
-                
                 if error != nil && error!.code == PFErrorCode.ErrorObjectNotFound.rawValue {
                     PAPCache.sharedCache.decrementCommentCountForPhoto(self.photo!)
-                    // FIXME!!!!
-                    let alert = UIAlertView(title: NSLocalizedString("Could not post comment", comment: ""), message: NSLocalizedString("This photo is no longer available", comment: ""), delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "OK")
-                    alert.show()
+                    
+                    let alertController = UIAlertController(title: NSLocalizedString("Could not post comment", comment: ""), message: NSLocalizedString("This photo is no longer available", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+                    let alertAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+                    alertController.addAction(alertAction)
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                    
                     self.navigationController!.popViewControllerAnimated(true)
                 }
                 
@@ -324,9 +326,11 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
 
     func handleCommentTimeout(aTimer: NSTimer) {
         MBProgressHUD.hideHUDForView(self.view.superview, animated: true)
-        // FIXME!!!!!!
-        let alert = UIAlertView(title: NSLocalizedString("New Comment", comment: ""), message: NSLocalizedString("Your comment will be posted next time there is an Internet connection.", comment: ""), delegate: nil, cancelButtonTitle: nil, otherButtonTitles: NSLocalizedString("Dismiss", comment: ""))
-        alert.show()
+        
+        let alertController = UIAlertController(title: NSLocalizedString("New Comment", comment: ""), message: NSLocalizedString("Your comment will be posted next time there is an Internet connection.", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+        let alertAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+        alertController.addAction(alertAction)
+        presentViewController(alertController, animated: true, completion: nil)
     }
 
     func shouldPresentAccountViewForUser(user: PFUser) {

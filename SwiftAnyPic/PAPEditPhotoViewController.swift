@@ -154,12 +154,10 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UIScrol
         }
         
         if self.photoFile == nil || self.thumbnailFile == nil {
-            let alertController = UIAlertController(title: "Couldn't post your photo", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-            let alertAction = UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Cancel, handler: nil)
+            let alertController = UIAlertController(title: NSLocalizedString("Couldn't post your photo", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            let alertAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
             alertController.addAction(alertAction)
             presentViewController(alertController, animated: true, completion: nil)
-// FIXME: to be removed            let alert: UIAlertView = UIAlertView(title: "Couldn't post your photo", message: nil, delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Dismiss", nil)
-//            alert.show()
             return
         }
         
@@ -213,12 +211,10 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UIScrol
                 NSNotificationCenter.defaultCenter().postNotificationName(PAPTabBarControllerDidFinishEditingPhotoNotification, object: photo)
             } else {
                 print("Photo failed to save: \(error)")
-                let alertController = UIAlertController(title: "Couldn't post your photo", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-                let alertAction = UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Cancel, handler: nil)
+                let alertController = UIAlertController(title: NSLocalizedString("Couldn't post your photo", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+                let alertAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
                 alertController.addAction(alertAction)
                 self.presentViewController(alertController, animated: true, completion: nil)
-//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Couldn't post your photo" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil];
-//                [alert show];
             }
             UIApplication.sharedApplication().endBackgroundTask(self.photoPostBackgroundTaskId)
         }
