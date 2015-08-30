@@ -1,6 +1,10 @@
 import UIKit
 import MobileCoreServices
 
+@objc protocol PAPTabBarControllerDelegate {
+    func tabBarController(tabBarController: UITabBarController, cameraButtonTouchUpInsideAction button: UIButton)
+}
+
 class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate {
     var navController: UINavigationController?
 
@@ -8,11 +12,6 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //[[self tabBar] setBackgroundImage:[UIImage imageNamed:@"BackgroundTabBar.png"]];
-    //    [[self tabBar] setSelectionIndicatorImage:[UIImage imageNamed:@"BackgroundTabBarItemSelected.png"]];
-       // self.tabBar.tintColor = [UIColor colorWithRed:139.0f/255.0f green:111.0f/255.0f blue:95.0f/255.0f alpha:1.0f];
-        
         
         // iOS 7 style
         self.tabBar.tintColor = UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 50.0/255.0, alpha: 1.0)
@@ -23,11 +22,6 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK:- UITabBarController
@@ -173,9 +167,4 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
     func handleGesture(gestureRecognizer: UIGestureRecognizer) {
         self.shouldPresentPhotoCaptureController()
     }
-}
-
-
-@objc protocol PAPTabBarControllerDelegate {
-    func tabBarController(tabBarController: UITabBarController, cameraButtonTouchUpInsideAction button: UIButton)
 }
