@@ -1,10 +1,13 @@
+[![](https://img.shields.io/github/issues-raw/kwkhaw/SwiftAnyPic.svg)]()
+[![GitHub license](https://img.shields.io/github/license/kwkhaw/SwiftAnyPic.svg)]()
+
 # SwiftAnyPic
 Swift port of AnyPic project [https://github.com/ParsePlatform/Anypic](https://github.com/ParsePlatform/Anypic)
 
 ## Requirements
 This application requires Xcode 7 and the iOS SDK v9.0.
 
-* Developed on Xcode 7 beta 5.
+* Developed on Xcode 7 beta 6.
 * Tested only with Simulator iPhone 5s.
 
 ## Setup
