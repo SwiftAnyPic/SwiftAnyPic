@@ -9,6 +9,7 @@ This application requires Xcode 7 and the iOS SDK v9.0.
 
 * Developed on Xcode 7 beta 6.
 * Tested only with Simulator iPhone 5s.
+* **Note: Cocoapods version must be at least version 0.38.2**
 
 ## Setup
 1. Install all project dependencies from [CocoaPods](http://cocoapods.org/#install) by running this script: ```pod install```
