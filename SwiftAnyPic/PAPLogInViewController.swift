@@ -83,13 +83,15 @@ class PAPLogInViewController: UIViewController, FBLoginViewDelegate {
                 var errorMessage: String = ""
                 if error == nil {
                     print("Uh oh. The user cancelled the Facebook login.")
-                    errorMessage = "Uh oh. The user cancelled the Facebook login."
+                    errorMessage = NSLocalizedString("Uh oh. The user cancelled the Facebook login.", comment: "")
                 } else {
                     print("Uh oh. An error occurred: %@", error)
                     errorMessage = error!.localizedDescription
                 }
-                let alert = UIAlertView(title: "Log In Error", message: errorMessage, delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Dismiss", "")
-                alert.show()
+                let alertController = UIAlertController(title: NSLocalizedString("Log In Error", comment: ""), message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                let alertAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+                alertController.addAction(alertAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
             } else {
                 if user!.isNew {
                     print("User with facebook signed up and logged in!")
