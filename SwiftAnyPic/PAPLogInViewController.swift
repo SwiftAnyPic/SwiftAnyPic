@@ -69,46 +69,47 @@ class PAPLogInViewController: UIViewController, FBLoginViewDelegate {
     func handleFacebookSession() {
         if PFUser.currentUser() != nil {
             if self.delegate != nil && self.delegate!.respondsToSelector(Selector("logInViewControllerDidLogUserIn:")) {
-                self.delegate!.performSelector(Selector("logInViewControllerDidLogUserIn:"), withObject: PFUser.currentUser())
+                self.delegate!.performSelector(Selector("logInViewControllerDidLogUserIn:"), withObject: PFUser.currentUser()!)
             }
             return
         }
         
-        let fbActiveSession = FBSession.activeSession()
-        let accessTokenData = fbActiveSession.accessTokenData
-        let accessToken: String = accessTokenData.accessToken
-        let expirationDate: NSDate = accessTokenData.expirationDate
-        let facebookUserId: String = accessTokenData.userID
-        
-        // FIXME: check for nil or zero length?
-        if accessToken.length == 0 || facebookUserId.length == 0 {
-            print("Login failure. FB Access Token or user ID does not exist")
-            return
-        }
-        
+        let permissionsArray = ["public_profile", "user_friends", "email"]
         self.hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         
-        // Unfortunately there are some issues with accessing the session provided from FBLoginView with the Parse SDK's (thread affinity)
-        // Just work around this by setting the session to nil, since the relevant values will be discarded anyway when linking with Parse (permissions flag on FBAccessTokenData)
-        // that we need to get back again with a refresh of the session
-        if fbActiveSession.respondsToSelector(Selector("clearAffinitizedThread")) {
-            fbActiveSession.performSelector(Selector("clearAffinitizedThread"))
-        }
-        
-        PFFacebookUtils.logInWithFacebookId(facebookUserId, accessToken: accessToken, expirationDate: expirationDate, block: { (user, error) in
-           if error == nil {
-               self.hud!.removeFromSuperview()
-               if self.delegate != nil {
-                   if self.delegate!.respondsToSelector(Selector("logInViewControllerDidLogUserIn:")) {
-                       self.delegate!.performSelector(Selector("logInViewControllerDidLogUserIn:"), withObject: user)
-                   }
-               }
-           } else {
-               self.cancelLogIn(error)
-           }
-       })
+        // Login PFUser using Facebook
+        PFFacebookUtils.logInWithPermissions(permissionsArray, block: { (user, error) in
+            if user == nil {
+                var errorMessage: String = ""
+                if error == nil {
+                    print("Uh oh. The user cancelled the Facebook login.")
+                    errorMessage = "Uh oh. The user cancelled the Facebook login."
+                } else {
+                    print("Uh oh. An error occurred: %@", error)
+                    errorMessage = error!.localizedDescription
+                }
+                let alert = UIAlertView(title: "Log In Error", message: errorMessage, delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Dismiss", "")
+                alert.show()
+            } else {
+                if user!.isNew {
+                    print("User with facebook signed up and logged in!")
+                } else {
+                    print("User with facebook logged in!")
+                }
+                
+                if error == nil {
+                    self.hud!.removeFromSuperview()
+                    if self.delegate != nil {
+                        if self.delegate!.respondsToSelector(Selector("logInViewControllerDidLogUserIn:")) {
+                        self.delegate!.performSelector(Selector("logInViewControllerDidLogUserIn:"), withObject: user)
+                        }
+                    }
+                } else {
+                    self.cancelLogIn(error)
+                }
+            }
+        })
     }
-
 
     // MARK:- ()
 
