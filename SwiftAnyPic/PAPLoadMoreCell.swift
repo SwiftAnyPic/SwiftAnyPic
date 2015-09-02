@@ -18,7 +18,7 @@ class PAPLoadMoreCell: PFTableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         // Initialization code
-        self.cellInsetWidth = 0.0
+        self._cellInsetWidth = 0.0
         hideSeparatorTop = false
         hideSeparatorBottom = false
 
@@ -34,7 +34,9 @@ class PAPLoadMoreCell: PFTableViewCell {
             mainView!.backgroundColor = UIColor.blackColor()
         }
         
-        
+        // FIXME: I can't find where they are initialized in the original Anypic
+        self.separatorImageTop = UIImageView(image: UIImage(named: "SeparatorComments.png"))
+        self.separatorImageBottom = UIImageView(image: UIImage(named: "SeparatorComments.png"))
         
         self.loadMoreImageView = UIImageView(image: UIImage(named: "CellLoadMore.png"))
         mainView!.addSubview(self.loadMoreImageView!)
@@ -49,22 +51,22 @@ class PAPLoadMoreCell: PFTableViewCell {
     // MARK:- UIView
 
     override func layoutSubviews() {
-        mainView!.frame = CGRectMake(self.cellInsetWidth, self.contentView.frame.origin.y, self.contentView.frame.size.width-2*self.cellInsetWidth, self.contentView.frame.size.height)
+        mainView!.frame = CGRectMake(self._cellInsetWidth, self.contentView.frame.origin.y, self.contentView.frame.size.width-2*self._cellInsetWidth, self.contentView.frame.size.height)
         
         // Layout load more text
         self.loadMoreImageView!.frame = CGRectMake(105.0, 15.0, 111.0, 18.0)
 
         // Layout separator
-        self.separatorImageBottom!.frame = CGRectMake(0.0, self.frame.size.height - 2.0, self.frame.size.width-self.cellInsetWidth * 2.0, 2.0)
+        self.separatorImageBottom!.frame = CGRectMake(0.0, self.frame.size.height - 2.0, self.frame.size.width-self._cellInsetWidth * 2.0, 2.0)
         self.separatorImageBottom!.hidden = hideSeparatorBottom
         
-        self.separatorImageTop!.frame = CGRectMake(0.0, 0.0, self.frame.size.width - self.cellInsetWidth * 2.0, 2.0)
+        self.separatorImageTop!.frame = CGRectMake(0.0, 0.0, self.frame.size.width - self._cellInsetWidth * 2.0, 2.0)
         self.separatorImageTop!.hidden = hideSeparatorTop
     }
 
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        if self.cellInsetWidth != 0.0 {
+        if self._cellInsetWidth != 0.0 {
             PAPUtility.drawSideDropShadowForRect(mainView!.frame, inContext: UIGraphicsGetCurrentContext()!)
         }
     }
