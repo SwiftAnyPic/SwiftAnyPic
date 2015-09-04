@@ -41,7 +41,6 @@ class PAPPhotoHeaderView: PFTableViewCell {
     // MARK:- Initialization
 
     init(frame: CGRect, buttons otherButtons: PAPPhotoHeaderButtons) {
-// FIXME: Why this won't compile?       super.init(frame: frame)
         super.init(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
         self.frame = frame
         
