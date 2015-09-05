@@ -11,7 +11,6 @@
 		C81E05401B73AC79004E781D /* PAPSettingsButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81E053F1B73AC79004E781D /* PAPSettingsButtonItem.swift */; };
 		C81E05431B73B6F2004E781D /* PAPFindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81E05421B73B6F2004E781D /* PAPFindFriendsViewController.swift */; };
 		C81E05451B73B923004E781D /* PAPFindFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81E05441B73B923004E781D /* PAPFindFriendsCell.swift */; };
-		C81E05471B73BA97004E781D /* PAPSettingsActionSheetDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81E05461B73BA97004E781D /* PAPSettingsActionSheetDelegate.swift */; };
 		C81E05491B744425004E781D /* PAPPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81E05481B744425004E781D /* PAPPhotoCell.swift */; };
 		C81E054B1B744F1E004E781D /* PAPLoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81E054A1B744F1E004E781D /* PAPLoadMoreCell.swift */; };
 		C81E054D1B746AEA004E781D /* PAPProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81E054C1B746AEA004E781D /* PAPProfileImageView.swift */; };
@@ -65,7 +64,6 @@
 		C81E053F1B73AC79004E781D /* PAPSettingsButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPSettingsButtonItem.swift; sourceTree = "<group>"; };
 		C81E05421B73B6F2004E781D /* PAPFindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPFindFriendsViewController.swift; sourceTree = "<group>"; };
 		C81E05441B73B923004E781D /* PAPFindFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPFindFriendsCell.swift; sourceTree = "<group>"; };
-		C81E05461B73BA97004E781D /* PAPSettingsActionSheetDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPSettingsActionSheetDelegate.swift; sourceTree = "<group>"; };
 		C81E05481B744425004E781D /* PAPPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPPhotoCell.swift; sourceTree = "<group>"; };
 		C81E054A1B744F1E004E781D /* PAPLoadMoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPLoadMoreCell.swift; sourceTree = "<group>"; };
 		C81E054C1B746AEA004E781D /* PAPProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPProfileImageView.swift; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 			isa = PBXGroup;
 			children = (
 				C81E05421B73B6F2004E781D /* PAPFindFriendsViewController.swift */,
-				C81E05461B73BA97004E781D /* PAPSettingsActionSheetDelegate.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -524,7 +521,6 @@
 				C8CED75D1B6FB175006B6972 /* PAPActivityCell.swift in Sources */,
 				C89DE16C1B6A73E9004064C0 /* PAPTabBarController.swift in Sources */,
 				C81E054B1B744F1E004E781D /* PAPLoadMoreCell.swift in Sources */,
-				C81E05471B73BA97004E781D /* PAPSettingsActionSheetDelegate.swift in Sources */,
 				C81E05491B744425004E781D /* PAPPhotoCell.swift in Sources */,
 				C81E054D1B746AEA004E781D /* PAPProfileImageView.swift in Sources */,
 				C81E05401B73AC79004E781D /* PAPSettingsButtonItem.swift in Sources */,

@@ -3,7 +3,6 @@ import ParseUI
 import MBProgressHUD
 
 class PAPActivityFeedViewController: PFQueryTableViewController, PAPActivityCellDelegate {
-    var settingsActionSheetDelegate: PAPSettingsActionSheetDelegate?
     var lastRefresh: NSDate?
     var blankTimelineView: UIView?
     
@@ -255,10 +254,26 @@ class PAPActivityFeedViewController: PFQueryTableViewController, PAPActivityCell
     // MARK:- ()
     
     func settingsButtonAction(sender: AnyObject) {
-        self.settingsActionSheetDelegate = PAPSettingsActionSheetDelegate(navigationController: self.navigationController)
-        let actionSheet = UIActionSheet(title: nil, delegate: self.settingsActionSheetDelegate, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: NSLocalizedString("My Profile", comment: ""), NSLocalizedString("Find Friends", comment: ""), NSLocalizedString("Log Out", comment: ""))
-        actionSheet.cancelButtonIndex = actionSheet.addButtonWithTitle("Cancel")
-        actionSheet.showFromTabBar(self.tabBarController!.tabBar)
+        let actionController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let myProfileAction = UIAlertAction(title: NSLocalizedString("My Profile", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in
+            self.navigationController!.pushViewController(PAPAccountViewController(user: PFUser.currentUser()!), animated: true)
+        })
+        let findFriendsAction = UIAlertAction(title: NSLocalizedString("Find Friends", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in
+            self.navigationController!.pushViewController(PAPFindFriendsViewController(style: UITableViewStyle.Plain), animated: true)
+        })
+        let logOutAction = UIAlertAction(title: NSLocalizedString("Log Out", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in
+            // Log out user and present the login view controller
+            (UIApplication.sharedApplication().delegate as! AppDelegate).logOut()
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        actionController.addAction(myProfileAction)
+        actionController.addAction(findFriendsAction)
+        actionController.addAction(logOutAction)
+        actionController.addAction(cancelAction)
+        
+        self.presentViewController(actionController, animated: true, completion: nil)
     }
     
     func inviteFriendsButtonAction(sender: AnyObject) {
