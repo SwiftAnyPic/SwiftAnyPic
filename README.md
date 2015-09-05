@@ -8,7 +8,9 @@ Swift port of AnyPic project [https://github.com/ParsePlatform/Anypic](https://g
 This application requires Xcode 7 and the iOS SDK v9.0.
 
 * Developed on Xcode 7 beta 6.
-* Tested only with Simulator iPhone 5s.
+* Tested only with:
+  * Simulator iPhone 5s.
+  * Device iPhone 5s (iOS 9 beta 3). **You need to set "Enable Bitcode" to false for Parse, ParseCrashReporting, ParseFacebookUtils and ParseUI in Pods, else compilation will fail.**
 * **Note: Cocoapods version must be at least version 0.38.2**
 
 ## Setup
