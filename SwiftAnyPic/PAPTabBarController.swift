@@ -81,17 +81,17 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
         let photoLibraryAvailable: Bool = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
         
         if cameraDeviceAvailable && photoLibraryAvailable {
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            let actionController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
             
             let takePhotoAction = UIAlertAction(title: NSLocalizedString("Take Photo", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in self.shouldStartCameraController() })
             let choosePhotoAction = UIAlertAction(title: NSLocalizedString("Choose Photo", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
             let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
             
-            alertController.addAction(takePhotoAction)
-            alertController.addAction(choosePhotoAction)
-            alertController.addAction(cancelAction)
+            actionController.addAction(takePhotoAction)
+            actionController.addAction(choosePhotoAction)
+            actionController.addAction(cancelAction)
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.presentViewController(actionController, animated: true, completion: nil)
         } else {
             // if we don't have at least two options, we automatically show whichever is available (camera or roll)
             self.shouldPresentPhotoCaptureController()
