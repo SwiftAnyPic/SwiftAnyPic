@@ -5,7 +5,7 @@ import MobileCoreServices
     func tabBarController(tabBarController: UITabBarController, cameraButtonTouchUpInsideAction button: UIButton)
 }
 
-class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate {
+class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var navController: UINavigationController?
 
     // MARK:- UIViewController
@@ -62,17 +62,6 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
         self.presentViewController(self.navController!, animated: true, completion: nil)
     }
 
-    // MARK:- UIActionSheetDelegate
-    // FIXME???
-
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        if buttonIndex == 0 {
-            self.shouldStartCameraController()
-        } else if buttonIndex == 1 {
-            self.shouldStartPhotoLibraryPickerController()
-        }
-    }
-
     // MARK:- PAPTabBarController
 
     func shouldPresentPhotoCaptureController() -> Bool {
@@ -92,9 +81,17 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
         let photoLibraryAvailable: Bool = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
         
         if cameraDeviceAvailable && photoLibraryAvailable {
-            // TODO: Change to use UIActionController
-            let actionSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Take Photo", "Choose Photo")
-            actionSheet.showFromTabBar(self.tabBar)
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            
+            let takePhotoAction = UIAlertAction(title: NSLocalizedString("Take Photo", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in self.shouldStartCameraController() })
+            let choosePhotoAction = UIAlertAction(title: NSLocalizedString("Choose Photo", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+            
+            alertController.addAction(takePhotoAction)
+            alertController.addAction(choosePhotoAction)
+            alertController.addAction(cancelAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         } else {
             // if we don't have at least two options, we automatically show whichever is available (camera or roll)
             self.shouldPresentPhotoCaptureController()
