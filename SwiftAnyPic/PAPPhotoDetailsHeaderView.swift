@@ -51,14 +51,9 @@ private let numLikePics: CGFloat = 7.0
 
 
 class PAPPhotoDetailsHeaderView: UIView {
-    /// The photo displayed in the view
-    private(set) var _photo: PFObject?
 
     /// The user that took the photo
     private(set) var photographer: PFUser?
-
-    /// Array of the users that liked the photo
-    var _likeUsers: [PFUser]?
 
     /// Heart-shaped like button
     private(set) var likeButton: UIButton?
@@ -84,9 +79,9 @@ class PAPPhotoDetailsHeaderView: UIView {
             timeFormatter = TTTTimeIntervalFormatter()
         }
         
-        self._photo = aPhoto
-        self.photographer = self._photo!.objectForKey(kPAPPhotoUserKey) as? PFUser
-        self._likeUsers = nil
+        self.photo = aPhoto
+        self.photographer = self.photo!.objectForKey(kPAPPhotoUserKey) as? PFUser
+        self.likeUsers = nil
         
         self.backgroundColor = UIColor.clearColor()
         self.createView()
@@ -99,13 +94,13 @@ class PAPPhotoDetailsHeaderView: UIView {
             timeFormatter = TTTTimeIntervalFormatter()
         }
 
-        self._photo = aPhoto
+        self.photo = aPhoto
         self.photographer = aPhotographer
-        self._likeUsers = theLikeUsers
+        self.likeUsers = theLikeUsers
         
         self.backgroundColor = UIColor.clearColor()
 
-        if self._photo != nil && self.photographer != nil && self._likeUsers != nil {
+        if self.photo != nil && self.photographer != nil && likeUsers != nil {
             self.createView()
         }
     }
@@ -119,29 +114,21 @@ class PAPPhotoDetailsHeaderView: UIView {
     class func rectForView() -> CGRect {
         return CGRectMake(CGFloat(0.0), CGFloat(0.0), UIScreen.mainScreen().bounds.size.width, CGFloat(viewTotalHeight))
     }
-
+    
+    /// The photo displayed in the view
     var photo: PFObject? {
-        get {
-            return _photo
-        }
-        
-        set {
-            _photo = newValue
-
-            if self._photo != nil && self.photographer != nil && self._likeUsers != nil {
+        didSet {
+            if photo != nil && self.photographer != nil && self.likeUsers != nil {
                 self.createView()
                 self.setNeedsDisplay()
             }
         }
     }
 
+    /// Array of the users that liked the photo
     var likeUsers: [PFUser]? {
-        get {
-            return _likeUsers
-        }
-        
-        set {
-            _likeUsers = newValue!.sort { (liker1, liker2) in
+        didSet {
+            likeUsers = likeUsers!.sort { (liker1, liker2) in
                 let displayName1 = liker1.objectForKey(kPAPUserDisplayNameKey) as! String
                 let displayName2 = liker2.objectForKey(kPAPUserDisplayNameKey) as! String
                 
@@ -164,11 +151,11 @@ class PAPPhotoDetailsHeaderView: UIView {
                 image.removeFromSuperview()
             }
 
-            likeButton!.setTitle("\(self._likeUsers!.count)", forState: UIControlState.Normal)
+            likeButton!.setTitle("\(likeUsers!.count)", forState: UIControlState.Normal)
 
-            self.currentLikeAvatars = Array<PAPProfileImageView>(count: self._likeUsers!.count, repeatedValue: PAPProfileImageView())
+            self.currentLikeAvatars = Array<PAPProfileImageView>(count: likeUsers!.count, repeatedValue: PAPProfileImageView())
             
-            let numOfPics: Int = Int(numLikePics) > self._likeUsers!.count ? self._likeUsers!.count : Int(numLikePics)
+            let numOfPics: Int = Int(numLikePics) > likeUsers!.count ? likeUsers!.count : Int(numLikePics)
 
             for var i = 0; i < numOfPics; i++ {
                 let profilePic = PAPProfileImageView()
@@ -177,8 +164,8 @@ class PAPPhotoDetailsHeaderView: UIView {
                 profilePic.profileButton!.tag = i
 
                 
-                if PAPUtility.userHasProfilePictures(self._likeUsers![i]) {
-                    profilePic.setFile((self._likeUsers![i] as PFUser).objectForKey(kPAPUserProfilePicSmallKey) as? PFFile)
+                if PAPUtility.userHasProfilePictures(likeUsers![i]) {
+                    profilePic.setFile((likeUsers![i] as PFUser).objectForKey(kPAPUserProfilePicSmallKey) as? PFFile)
                 } else {
                     profilePic.setImage(PAPUtility.defaultProfilePicture()!)
                 }
@@ -201,8 +188,8 @@ class PAPPhotoDetailsHeaderView: UIView {
     }
 
     func reloadLikeBar() {
-        self._likeUsers = PAPCache.sharedCache.likersForPhoto(self._photo!)
-        self.setLikeButtonState(PAPCache.sharedCache.isPhotoLikedByCurrentUser(self._photo!))
+        likeUsers = PAPCache.sharedCache.likersForPhoto(self.photo!)
+        self.setLikeButtonState(PAPCache.sharedCache.isPhotoLikedByCurrentUser(self.photo!))
         likeButton!.addTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
     }
 
@@ -217,7 +204,7 @@ class PAPPhotoDetailsHeaderView: UIView {
         self.photoImageView!.backgroundColor = UIColor.blackColor()
         self.photoImageView!.contentMode = UIViewContentMode.ScaleAspectFit
         
-        let imageFile: PFFile? = self._photo!.objectForKey(kPAPPhotoPictureKey) as? PFFile
+        let imageFile: PFFile? = self.photo!.objectForKey(kPAPPhotoPictureKey) as? PFFile
 
         if imageFile != nil {
             self.photoImageView!.file = imageFile
@@ -279,7 +266,7 @@ class PAPPhotoDetailsHeaderView: UIView {
             userButton.frame = userButtonFrame
             
             // Create time label
-            let timeString: String = timeFormatter!.stringForTimeIntervalFromDate(NSDate(), toDate: self._photo!.createdAt!)
+            let timeString: String = timeFormatter!.stringForTimeIntervalFromDate(NSDate(), toDate: self.photo!.createdAt!)
             let timeLabelSize: CGSize = timeString.boundingRectWithSize(CGSizeMake(nameLabelMaxWidth, CGFloat.max),
                                                             options: [NSStringDrawingOptions.TruncatesLastVisibleLine, NSStringDrawingOptions.UsesLineFragmentOrigin],
                                                          attributes: [NSFontAttributeName: UIFont.systemFontOfSize(11.0)],
@@ -331,10 +318,10 @@ class PAPPhotoDetailsHeaderView: UIView {
         button.removeTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
         self.setLikeButtonState(liked)
 
-        let originalLikeUsersArray = self._likeUsers
-        var newLikeUsersSet = Set<PFUser>(minimumCapacity: self._likeUsers!.count)
+        let originalLikeUsersArray = likeUsers
+        var newLikeUsersSet = Set<PFUser>(minimumCapacity: likeUsers!.count)
         
-        for likeUser in self._likeUsers! {
+        for likeUser in likeUsers! {
             // add all current likeUsers BUT currentUser
             if likeUser.objectId != PFUser.currentUser()!.objectId {
                 newLikeUsersSet.insert(likeUser)
@@ -342,18 +329,18 @@ class PAPPhotoDetailsHeaderView: UIView {
         }
         
         if liked {
-            PAPCache.sharedCache.incrementLikerCountForPhoto(self._photo!)
+            PAPCache.sharedCache.incrementLikerCountForPhoto(self.photo!)
             newLikeUsersSet.insert(PFUser.currentUser()!)
         } else {
-            PAPCache.sharedCache.decrementLikerCountForPhoto(self._photo!)
+            PAPCache.sharedCache.decrementLikerCountForPhoto(self.photo!)
         }
         
-        PAPCache.sharedCache.setPhotoIsLikedByCurrentUser(self._photo!, liked: liked)
+        PAPCache.sharedCache.setPhotoIsLikedByCurrentUser(self.photo!, liked: liked)
 
         self.likeUsers = Array(newLikeUsersSet)
 
         if (liked) {
-            PAPUtility.likePhotoInBackground(self._photo!, block: { (succeeded, error) in
+            PAPUtility.likePhotoInBackground(self.photo!, block: { (succeeded, error) in
                 if !succeeded {
                     button.addTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
                     self.likeUsers = originalLikeUsersArray
@@ -361,7 +348,7 @@ class PAPPhotoDetailsHeaderView: UIView {
                 }
             })
         } else {
-            PAPUtility.unlikePhotoInBackground(self._photo!, block: { (succeeded, error) in
+            PAPUtility.unlikePhotoInBackground(self.photo!, block: { (succeeded, error) in
                 if !succeeded {
                     button.addTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
                     self.likeUsers = originalLikeUsersArray
@@ -370,11 +357,11 @@ class PAPPhotoDetailsHeaderView: UIView {
             })
         }
         
-        NSNotificationCenter.defaultCenter().postNotificationName(PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotification, object: self._photo, userInfo: [PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey: liked])
+        NSNotificationCenter.defaultCenter().postNotificationName(PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotification, object: self.photo, userInfo: [PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey: liked])
     }
 
     func didTapLikerButtonAction(button: UIButton) {
-        let user: PFUser = self._likeUsers![button.tag]
+        let user: PFUser = likeUsers![button.tag]
         if delegate != nil && delegate!.respondsToSelector(Selector("photoDetailsHeaderView:didTapUserButton:user:")) {
             delegate!.photoDetailsHeaderView(self, didTapUserButton: button, user: user)
         }    
