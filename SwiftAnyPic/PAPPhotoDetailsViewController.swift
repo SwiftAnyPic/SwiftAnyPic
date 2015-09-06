@@ -2,14 +2,9 @@ import UIKit
 import ParseUI
 import MBProgressHUD
 
-enum ActionSheetTags: Int {
-    case MainAction = 0,
-    ConfirmDeleteAction = 1
-}
-
 let kPAPCellInsetWidth: CGFloat = 0.0
 
-class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDelegate, UIActionSheetDelegate, PAPPhotoDetailsHeaderViewDelegate, PAPBaseTextCellDelegate {
+class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDelegate, PAPPhotoDetailsHeaderViewDelegate, PAPBaseTextCellDelegate {
     private(set) var photo: PFObject?
     private var likersQueryInProgress: Bool
     
@@ -73,7 +68,7 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
         commentTextField!.delegate = self
         self.tableView.tableFooterView = footerView
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("activityButtonAction:"))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("actionButtonAction:"))
         
         // Register to be notified when the keyboard will be shown to scroll the view
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
@@ -230,29 +225,6 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
         return textField.resignFirstResponder()
     }
 
-
-    // MARK - UIActionSheetDelegate
-
-    // FIXME!!!!!!!!!
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        if actionSheet.tag == ActionSheetTags.MainAction.rawValue {
-            if actionSheet.destructiveButtonIndex == buttonIndex {
-                // prompt to delete
-                let actionSheet: UIActionSheet = UIActionSheet(title: NSLocalizedString("Are you sure you want to delete this photo?", comment: ""), delegate: self, cancelButtonTitle: NSLocalizedString("Cancel", comment: ""), destructiveButtonTitle: NSLocalizedString("Yes, delete photo", comment: ""), otherButtonTitles: "")
-                actionSheet.tag = ActionSheetTags.ConfirmDeleteAction.rawValue
-                actionSheet.showFromTabBar(self.tabBarController!.tabBar)
-            } else {
-                self.activityButtonAction(actionSheet)
-            }
-        } else if actionSheet.tag == ActionSheetTags.ConfirmDeleteAction.rawValue {
-            if actionSheet.destructiveButtonIndex == buttonIndex {
-                
-                self.shouldDeletePhoto()
-            }
-        }
-    }
-
-
     // MARK:- UIScrollViewDelegate
 
     override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
@@ -274,17 +246,37 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
 
     // MARK:- ()
 
-    // FIXME
     func actionButtonAction(sender: AnyObject) {
-        let actionSheet = UIActionSheet()
-        actionSheet.delegate = self
-        actionSheet.tag = ActionSheetTags.MainAction.rawValue
-        actionSheet.destructiveButtonIndex = actionSheet.addButtonWithTitle(NSLocalizedString("Delete Photo", comment: ""))
-        if NSClassFromString("UIActivityViewController") != nil {
-            actionSheet.addButtonWithTitle(NSLocalizedString("Share Photo", comment: ""))
+        let actionController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        if self.currentUserOwnsPhoto() {
+            let deletePhotoAction = UIAlertAction(title: NSLocalizedString("Delete Photo", comment: ""), style: UIAlertActionStyle.Destructive, handler: { _ in
+                // prompt to delete
+                self.showConfirmDeletePhotoActionSheet()
+            })
+            actionController.addAction(deletePhotoAction)
         }
-        actionSheet.cancelButtonIndex = actionSheet.addButtonWithTitle(NSLocalizedString("Cancel", comment: ""))
-        actionSheet.showFromTabBar(self.tabBarController!.tabBar)
+        let sharePhotoAction = UIAlertAction(title: NSLocalizedString("Share Photo", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in
+            self.activityButtonAction(self)
+        })
+        actionController.addAction(sharePhotoAction)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+        actionController.addAction(cancelAction)
+        
+        presentViewController(actionController, animated: true, completion: nil)
+    }
+    
+    func showConfirmDeletePhotoActionSheet() {
+        // prompt to delete
+        let actionController = UIAlertController(title: NSLocalizedString("Are you sure you want to delete this photo?", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let deleteAction = UIAlertAction(title: NSLocalizedString("Yes, delete photo", comment: ""), style: UIAlertActionStyle.Destructive, handler: { _ in
+            self.shouldDeletePhoto()
+        })
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        actionController.addAction(deleteAction)
+        actionController.addAction(cancelAction)
+        
+        presentViewController(actionController, animated: true, completion: nil)
     }
 
     func activityButtonAction(sender: AnyObject) {
