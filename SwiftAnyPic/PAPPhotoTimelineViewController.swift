@@ -403,7 +403,7 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
                                     commenters.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
                                 }
                                 
-                                if (activity.objectForKey(kPAPActivityFromUserKey) as! PFUser).objectId == PFUser.currentUser()!.objectId {
+                                if (activity.objectForKey(kPAPActivityFromUserKey) as? PFUser)?.objectId == PFUser.currentUser()!.objectId {
                                     if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
                                         isLikedByCurrentUser = true
                                     }

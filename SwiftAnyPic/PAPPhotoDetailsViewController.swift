@@ -21,7 +21,6 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
     init(photo aPhoto: PFObject) {
         self.likersQueryInProgress = false
         
-        // FIXME: Why can't I call this // super.init(style: UITableViewStyle.Plain)
         super.init(style: UITableViewStyle.Plain, className: nil)
         
         // The className to query on
@@ -372,7 +371,7 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
                     commenters.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
                 }
                 
-                if ((activity.objectForKey(kPAPActivityFromUserKey) as! PFObject).objectId) == PFUser.currentUser()!.objectId {
+                if ((activity.objectForKey(kPAPActivityFromUserKey) as? PFObject)?.objectId) == PFUser.currentUser()!.objectId {
                     if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
                         isLikedByCurrentUser = true
                     }
