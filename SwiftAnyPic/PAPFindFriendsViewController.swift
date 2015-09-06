@@ -28,11 +28,7 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
         self.outstandingFollowQueries = [NSObject: AnyObject]()
         self.outstandingCountQueries = [NSIndexPath: AnyObject]()
         
-//FIXME???        super.init(style: style)
         super.init(style: style, className: nil)
-
-        // Whether the built-in pull-to-refresh is enabled
-        self.pullToRefreshEnabled = true
 
         // Whether the built-in pull-to-refresh is enabled
         self.pullToRefreshEnabled = true
@@ -48,10 +44,19 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
 
     // MARK:- UIViewController
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.tableView.backgroundColor = UIColor.blackColor()
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "TitleFindFriends.png"))
+    
+        if self.navigationController!.viewControllers[0] == self {
+            let dismissLeftBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("dismissPresentingViewController"))
+            self.navigationItem.leftBarButtonItem = dismissLeftBarButtonItem
+        } else {
+            self.navigationItem.leftBarButtonItem = nil
+        }
 
         if MFMailComposeViewController.canSendMail() || MFMessageComposeViewController.canSendText() {
             self.headerView = UIView(frame: CGRectMake(0, 0, 320, 67))
@@ -83,6 +88,10 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
         self.tableView.separatorColor = UIColor(red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 1.0)
     }
 
+    func dismissPresentingViewController() {
+        self.navigationController!.dismissViewControllerAnimated(true, completion: nil)
+    }
+
     // MARK:- UITableViewDelegate
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -92,7 +101,6 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
             return 44.0
         }
     }
-
 
     // MARK:- PFQueryTableViewController
 
@@ -197,7 +205,7 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
                         }
                         let actualCell: PAPFindFriendsCell? = tableView.cellForRowAtIndexPath(indexPath) as? PAPFindFriendsCell
                         let appendS = number == 1 ? "" : "s"
-                        actualCell!.photoLabel!.text = "\(number) photo\(appendS)"
+                        actualCell?.photoLabel?.text = "\(number) photo\(appendS)"
                     }
                 }
             }
