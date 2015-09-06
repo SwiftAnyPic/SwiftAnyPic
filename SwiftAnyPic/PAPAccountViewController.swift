@@ -118,12 +118,12 @@ class PAPAccountViewController: PAPPhotoTimelineViewController {
         self.headerView!.addSubview(followerCountLabel)
         
         let followingCountLabel = UILabel(frame: CGRectMake(226.0, 110.0, self.headerView!.bounds.size.width - 226.0, 16.0))
-        followerCountLabel.textAlignment = NSTextAlignment.Center
-        followerCountLabel.backgroundColor = UIColor.clearColor()
-        followerCountLabel.textColor = UIColor.whiteColor()
-        followerCountLabel.shadowColor = UIColor(white: 0.0, alpha: 0.300)
-        followerCountLabel.shadowOffset = CGSizeMake(0.0, -1.0)
-        followerCountLabel.font = UIFont.boldSystemFontOfSize(12.0)
+        followingCountLabel.textAlignment = NSTextAlignment.Center
+        followingCountLabel.backgroundColor = UIColor.clearColor()
+        followingCountLabel.textColor = UIColor.whiteColor()
+        followingCountLabel.shadowColor = UIColor(white: 0.0, alpha: 0.300)
+        followingCountLabel.shadowOffset = CGSizeMake(0.0, -1.0)
+        followingCountLabel.font = UIFont.boldSystemFontOfSize(12.0)
         self.headerView!.addSubview(followingCountLabel)
         
         let userDisplayNameLabel = UILabel(frame: CGRectMake(0, 176.0, self.headerView!.bounds.size.width, 22.0))
