@@ -6,9 +6,6 @@ private let nameMaxWidth: CGFloat = 200.0
 
 class PAPActivityCell: PAPBaseTextCell {
 
-    /*!Setter for the activity associated with this cell */
-    var _activity: PFObject?
-
     /*! Private view components */
     var activityImageView: PAPProfileImageView?
     var activityImageButton: UIButton?
@@ -94,23 +91,17 @@ class PAPActivityCell: PAPBaseTextCell {
         }
     }
     
-    
+    /*!Setter for the activity associated with this cell */
     var activity: PFObject? {
-        get {
-            return _activity
-        }
-        
-        set {
-            // Set the activity property
-            _activity = newValue
-            if (_activity!.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeFollow || (_activity!.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeJoined {
+        didSet {
+            if (activity!.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeFollow || (activity!.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeJoined {
                 self.setActivityImageFile(nil)
             } else {
-                self.setActivityImageFile((_activity!.objectForKey(kPAPActivityPhotoKey) as! PFObject).objectForKey(kPAPPhotoThumbnailKey) as? PFFile)
+                self.setActivityImageFile((activity!.objectForKey(kPAPActivityPhotoKey) as! PFObject).objectForKey(kPAPPhotoThumbnailKey) as? PFFile)
             }
             
-            let activityString: String = PAPActivityFeedViewController.stringForActivityType(_activity!.objectForKey(kPAPActivityTypeKey) as! String)!
-            self.user = _activity!.objectForKey(kPAPActivityFromUserKey) as? PFUser
+            let activityString: String = PAPActivityFeedViewController.stringForActivityType(activity!.objectForKey(kPAPActivityTypeKey) as! String)!
+            self.user = activity!.objectForKey(kPAPActivityFromUserKey) as? PFUser
             
             // Set name button properties and avatar image
             if PAPUtility.userHasProfilePictures(self.user!) {
@@ -143,7 +134,7 @@ class PAPActivityCell: PAPBaseTextCell {
                 self.contentLabel!.text = activityString
             }
             
-            self.timeLabel!.text = timeFormatter!.stringForTimeIntervalFromDate(NSDate(), toDate: _activity!.createdAt!)
+            self.timeLabel!.text = timeFormatter!.stringForTimeIntervalFromDate(NSDate(), toDate: activity!.createdAt!)
             
             self.setNeedsDisplay()
         }
@@ -219,7 +210,7 @@ class PAPActivityCell: PAPBaseTextCell {
     
     func didTapActivityButton(sender: AnyObject) {
         if self.delegate?.respondsToSelector(Selector("cell:didTapActivityButton:")) != nil {
-            (self.delegate! as! PAPActivityCellDelegate).cell(self, didTapActivityButton: self._activity!)
+            (self.delegate! as! PAPActivityCellDelegate).cell(self, didTapActivityButton: self.activity!)
         }
     }
     

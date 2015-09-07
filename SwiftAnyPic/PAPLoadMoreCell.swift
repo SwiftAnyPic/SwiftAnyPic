@@ -10,15 +10,14 @@ class PAPLoadMoreCell: PFTableViewCell {
     var hideSeparatorTop: Bool = false
     var hideSeparatorBottom: Bool = false
 
-    var _cellInsetWidth: CGFloat = 0.0
-
     // MARK:- NSObject
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        // Initialization code
+        self.cellInsetWidth = 0.0
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        // Initialization code
-        self._cellInsetWidth = 0.0
         hideSeparatorTop = false
         hideSeparatorBottom = false
 
@@ -51,22 +50,22 @@ class PAPLoadMoreCell: PFTableViewCell {
     // MARK:- UIView
 
     override func layoutSubviews() {
-        mainView!.frame = CGRectMake(self._cellInsetWidth, self.contentView.frame.origin.y, self.contentView.frame.size.width-2*self._cellInsetWidth, self.contentView.frame.size.height)
+        mainView!.frame = CGRectMake(self.cellInsetWidth, self.contentView.frame.origin.y, self.contentView.frame.size.width-2*self.cellInsetWidth, self.contentView.frame.size.height)
         
         // Layout load more text
         self.loadMoreImageView!.frame = CGRectMake(105.0, 15.0, 111.0, 18.0)
 
         // Layout separator
-        self.separatorImageBottom!.frame = CGRectMake(0.0, self.frame.size.height - 2.0, self.frame.size.width-self._cellInsetWidth * 2.0, 2.0)
+        self.separatorImageBottom!.frame = CGRectMake(0.0, self.frame.size.height - 2.0, self.frame.size.width-self.cellInsetWidth * 2.0, 2.0)
         self.separatorImageBottom!.hidden = hideSeparatorBottom
         
-        self.separatorImageTop!.frame = CGRectMake(0.0, 0.0, self.frame.size.width - self._cellInsetWidth * 2.0, 2.0)
+        self.separatorImageTop!.frame = CGRectMake(0.0, 0.0, self.frame.size.width - self.cellInsetWidth * 2.0, 2.0)
         self.separatorImageTop!.hidden = hideSeparatorTop
     }
 
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        if self._cellInsetWidth != 0.0 {
+        if self.cellInsetWidth != 0.0 {
             PAPUtility.drawSideDropShadowForRect(mainView!.frame, inContext: UIGraphicsGetCurrentContext()!)
         }
     }
@@ -75,13 +74,8 @@ class PAPLoadMoreCell: PFTableViewCell {
     // MARK:- PAPLoadMoreCell
 
     var cellInsetWidth: CGFloat {
-        get {
-            return _cellInsetWidth
-        }
-        set {
-            let insetWidth = newValue
-            _cellInsetWidth = insetWidth
-            mainView!.frame = CGRectMake(insetWidth, mainView!.frame.origin.y, mainView!.frame.size.width - 2.0 * insetWidth, mainView!.frame.size.height)
+        didSet {
+            mainView!.frame = CGRectMake(cellInsetWidth, mainView!.frame.origin.y, mainView!.frame.size.width - 2.0 * cellInsetWidth, mainView!.frame.size.height)
             self.setNeedsDisplay()
         }
     }

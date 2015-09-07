@@ -16,9 +16,6 @@ struct PAPPhotoHeaderButtons : OptionSetType {
 
 class PAPPhotoHeaderView: PFTableViewCell {
 
-    /// The photo associated with this view
-    var _photo: PFObject?
-
     /// The bitmask which specifies the enabled interaction elements in the view
     var buttons: PAPPhotoHeaderButtons = .None
 
@@ -125,16 +122,11 @@ class PAPPhotoHeaderView: PFTableViewCell {
 
     // MARK:- PAPPhotoHeaderView
 
+    /// The photo associated with this view
     var photo: PFObject? {
-        get {
-            return _photo
-        }
-        
-        set {
-            _photo = newValue
-
+        didSet {
             // user's avatar
-            let user: PFUser? = _photo!.objectForKey(kPAPPhotoUserKey) as? PFUser
+            let user: PFUser? = photo!.objectForKey(kPAPPhotoUserKey) as? PFUser
             if PAPUtility.userHasProfilePictures(user!) {
                 let profilePictureSmall: PFFile = user!.objectForKey(kPAPUserProfilePicSmallKey) as! PFFile
                 self.avatarImageView!.setFile(profilePictureSmall)
@@ -179,7 +171,7 @@ class PAPPhotoHeaderView: PFTableViewCell {
             let userButtonFrame: CGRect = CGRectMake(userButtonPoint.x, userButtonPoint.y, userButtonSize.width, userButtonSize.height)
             self.userButton!.frame = userButtonFrame
             
-            let timeInterval: NSTimeInterval = self._photo!.createdAt!.timeIntervalSinceNow
+            let timeInterval: NSTimeInterval = self.photo!.createdAt!.timeIntervalSinceNow
             let timestamp: String = self.timeIntervalFormatter!.stringForTimeInterval(timeInterval)
             self.timestampLabel!.text = timestamp
 

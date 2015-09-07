@@ -4,8 +4,6 @@ import ParseUI
 class PAPFindFriendsCell: PFTableViewCell {
     var delegate: PAPFindFriendsCellDelegate?
     
-    /*! The user represented in the cell */
-    var _user: PFUser?
     var photoLabel: UILabel!
     var followButton: UIButton!
     
@@ -69,29 +67,24 @@ class PAPFindFriendsCell: PFTableViewCell {
 
     // MARK:- PAPFindFriendsCell
 
+    /*! The user represented in the cell */
     var user: PFUser? {
-        get {
-            return _user
-        }
-        
-        set {
-            _user = newValue
-            
+        didSet {
             // Configure the cell
-            if PAPUtility.userHasProfilePictures(self._user!) {
-                self.avatarImageView.setFile(self._user!.objectForKey(kPAPUserProfilePicSmallKey) as? PFFile)
+            if PAPUtility.userHasProfilePictures(self.user!) {
+                self.avatarImageView.setFile(self.user!.objectForKey(kPAPUserProfilePicSmallKey) as? PFFile)
             } else {
                 self.avatarImageView.setImage(PAPUtility.defaultProfilePicture()!)
             }
             
             // Set name 
-            let nameString: String = self._user!.objectForKey(kPAPUserDisplayNameKey) as! String
+            let nameString: String = self.user!.objectForKey(kPAPUserDisplayNameKey) as! String
             let nameSize: CGSize = nameString.boundingRectWithSize(CGSizeMake(144.0, CGFloat.max),
                                                             options: [NSStringDrawingOptions.TruncatesLastVisibleLine, NSStringDrawingOptions.UsesLineFragmentOrigin],
                                                          attributes: [NSFontAttributeName: UIFont.boldSystemFontOfSize(16.0)],
                                                             context: nil).size
-            nameButton.setTitle(self._user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState: UIControlState.Normal)
-            nameButton.setTitle(self._user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState: UIControlState.Highlighted)
+            nameButton.setTitle(self.user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState: UIControlState.Normal)
+            nameButton.setTitle(self.user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState: UIControlState.Highlighted)
 
             nameButton.frame = CGRectMake(60.0, 17.0, nameSize.width, nameSize.height)
             
@@ -116,14 +109,14 @@ class PAPFindFriendsCell: PFTableViewCell {
     /* Inform delegate that a user image or name was tapped */
     func didTapUserButtonAction(sender: AnyObject) {
         if self.delegate?.respondsToSelector(Selector("cell:didTapUserButton:")) != nil {
-            self.delegate!.cell(self, didTapUserButton: self._user!)
+            self.delegate!.cell(self, didTapUserButton: self.user!)
         }    
     }
 
     /* Inform delegate that the follow button was tapped */
     func didTapFollowButtonAction(sender: AnyObject) {
         if self.delegate?.respondsToSelector(Selector("cell:didTapFollowButton:")) != nil {
-            self.delegate!.cell(self, didTapFollowButton: self._user!)
+            self.delegate!.cell(self, didTapFollowButton: self.user!)
         }        
     }
 }

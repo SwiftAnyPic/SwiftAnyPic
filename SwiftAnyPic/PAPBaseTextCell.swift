@@ -44,9 +44,6 @@ class PAPBaseTextCell: PFTableViewCell {
 //        }
 //    }
 
-    /*! The user represented in the cell */
-    var _user: PFUser?
-
     /*! The cell's views. These shouldn't be modified but need to be exposed for the subclass */
     var mainView: UIView?
     var nameButton: UIButton?
@@ -56,24 +53,21 @@ class PAPBaseTextCell: PFTableViewCell {
     var timeLabel: UILabel?
     var separatorImage: UIImageView?
 
-    /*! The horizontal inset of the cell */
-    var _cellInsetWidth: CGFloat = 0
-
     var hideSeparator: Bool = false // True if the separator shouldn't be shown
     
     // MARK:- NSObject
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
         // Initialization code
+        cellInsetWidth = 0.0
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         if timeFormatter == nil {
             timeFormatter = TTTTimeIntervalFormatter()
         }
 
-        _cellInsetWidth = 0.0
         hideSeparator = false
         self.clipsToBounds = true
-        horizontalTextSpace = Int(PAPBaseTextCell.horizontalTextSpaceForInsetWidth(_cellInsetWidth))
+        horizontalTextSpace = Int(PAPBaseTextCell.horizontalTextSpaceForInsetWidth(cellInsetWidth))
         
         self.opaque = true
         self.selectionStyle = UITableViewCellSelectionStyle.None
@@ -146,7 +140,7 @@ class PAPBaseTextCell: PFTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-       mainView!.frame = CGRectMake(_cellInsetWidth, self.contentView.frame.origin.y, self.contentView.frame.size.width-2*_cellInsetWidth, self.contentView.frame.size.height)
+       mainView!.frame = CGRectMake(cellInsetWidth, self.contentView.frame.origin.y, self.contentView.frame.size.width-2*cellInsetWidth, self.contentView.frame.size.height)
         
         // Layout avatar image
         self.avatarImageView!.frame = CGRectMake(avatarX, avatarY + 5.0, avatarDim, avatarDim)
@@ -174,7 +168,7 @@ class PAPBaseTextCell: PFTableViewCell {
         self.timeLabel!.frame = CGRectMake(timeX, contentLabel!.frame.origin.y + contentLabel!.frame.size.height + vertElemSpacing, timeSize.width, timeSize.height)
         
         // Layour separator
-        self.separatorImage!.frame = CGRectMake(0, self.frame.size.height-1, self.frame.size.width-_cellInsetWidth*2, 1)
+        self.separatorImage!.frame = CGRectMake(0, self.frame.size.height-1, self.frame.size.width-cellInsetWidth*2, 1)
         self.separatorImage!.hidden = hideSeparator
     }
 
@@ -184,7 +178,7 @@ class PAPBaseTextCell: PFTableViewCell {
     /* Inform delegate that a user image or name was tapped */
     func didTapUserButtonAction(sender: AnyObject) {
         if self.delegate != nil && self.delegate!.respondsToSelector(Selector("cell:didTapUserButton:")) {
-            self.delegate!.cell(self, didTapUserButton: self._user!)
+            self.delegate!.cell(self, didTapUserButton: self.user!)
         }
     }
 
@@ -247,23 +241,18 @@ class PAPBaseTextCell: PFTableViewCell {
         return paddedString
     }
 
+    /*! The user represented in the cell */
     var user: PFUser? {
-        get {
-            return _user
-        }
-        
-        set {
-            _user = newValue
-            
+        didSet {
             // Set name button properties and avatar image
-            if PAPUtility.userHasProfilePictures(self._user!) {
-                self.avatarImageView!.setFile(self._user!.objectForKey(kPAPUserProfilePicSmallKey) as? PFFile)
+            if PAPUtility.userHasProfilePictures(self.user!) {
+                self.avatarImageView!.setFile(self.user!.objectForKey(kPAPUserProfilePicSmallKey) as? PFFile)
             } else {
                 self.avatarImageView!.setImage(PAPUtility.defaultProfilePicture()!)
             }
 
-            self.nameButton!.setTitle(self._user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState: UIControlState.Normal)
-            self.nameButton!.setTitle(self._user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState:UIControlState.Highlighted)
+            self.nameButton!.setTitle(self.user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState: UIControlState.Normal)
+            self.nameButton!.setTitle(self.user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState:UIControlState.Highlighted)
             
             // If user is set after the contentText, we reset the content to include padding
             if self.contentLabel!.text != nil {
@@ -275,7 +264,7 @@ class PAPBaseTextCell: PFTableViewCell {
 
     func setContentText(contentString: String) {
         // If we have a user we pad the content with spaces to make room for the name
-        if self._user != nil {
+        if self.user != nil {
             let nameSize: CGSize = self.nameButton!.titleLabel!.text!.boundingRectWithSize(CGSizeMake(nameMaxWidth, CGFloat.max),
                                                             options: [NSStringDrawingOptions.TruncatesLastVisibleLine, NSStringDrawingOptions.UsesLineFragmentOrigin],
                                                          attributes: [NSFontAttributeName: UIFont.boldSystemFontOfSize(13.0)],
@@ -294,16 +283,12 @@ class PAPBaseTextCell: PFTableViewCell {
         self.setNeedsDisplay()
     }
 
+    /*! The horizontal inset of the cell */
     var cellInsetWidth: CGFloat {
-        get {
-            return _cellInsetWidth
-        }
-        
-        set {
+        didSet {
             // Change the mainView's frame to be insetted by insetWidth and update the content text space
-            _cellInsetWidth = newValue
-            mainView!.frame = CGRectMake(newValue, mainView!.frame.origin.y, mainView!.frame.size.width-2*newValue, mainView!.frame.size.height)
-            horizontalTextSpace = Int(PAPBaseTextCell.horizontalTextSpaceForInsetWidth(newValue))
+            mainView!.frame = CGRectMake(cellInsetWidth, mainView!.frame.origin.y, mainView!.frame.size.width-2*cellInsetWidth, mainView!.frame.size.height)
+            horizontalTextSpace = Int(PAPBaseTextCell.horizontalTextSpaceForInsetWidth(cellInsetWidth))
             self.setNeedsDisplay()
         }
     }
@@ -316,7 +301,7 @@ class PAPBaseTextCell: PFTableViewCell {
         }
         
         set {
-            // FIXME: any other way tto check?
+            // FIXME: any other way to check?
             if _delegate?.hash != newValue!.hash {
                 _delegate = newValue
             }
