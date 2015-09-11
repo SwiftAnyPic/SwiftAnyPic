@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/kwkhaw/SwiftAnyPic.svg?branch=master)](https://travis-ci.org/kwkhaw/SwiftAnyPic)
 [![](https://img.shields.io/github/issues-raw/kwkhaw/SwiftAnyPic.svg)]()
 [![GitHub license](https://img.shields.io/github/license/kwkhaw/SwiftAnyPic.svg)]()
 
