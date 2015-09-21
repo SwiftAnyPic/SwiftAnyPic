@@ -205,8 +205,8 @@ class PAPWelcomeViewController: UIViewController, PAPLogInViewControllerDelegate
                             let data = result.objectForKey("data") as? NSArray
                             let facebookIds: NSMutableArray = NSMutableArray(capacity: data!.count)
                             for friendData in data! {
-                                if friendData["id"] != nil {
-                                    facebookIds.addObject(friendData["id"] as! NSDictionary)
+                                if let facebookId = friendData["id"] {
+                                    facebookIds.addObject(facebookId!)
                                 }
                             }
                             // cache friend data
