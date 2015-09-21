@@ -173,19 +173,18 @@ final class PAPCache {
         NSUserDefaults.standardUserDefaults().synchronize()
     }
 
-    func facebookFriends() -> [PFUser]? {
+    func facebookFriends() -> [PFUser] {
         let key = kPAPUserDefaultsCacheFacebookFriendsKey
         if cache.objectForKey(key) != nil {
-            return cache.objectForKey(key) as? [PFUser]
+            return cache.objectForKey(key) as! [PFUser]
         }
         
         let friends = NSUserDefaults.standardUserDefaults().objectForKey(key)
-        
         if friends != nil {
             cache.setObject(friends!, forKey: key)
+            return friends as! [PFUser]
         }
-
-        return friends as? [PFUser]
+        return [PFUser]()
     }
 
     // MARK:- ()
