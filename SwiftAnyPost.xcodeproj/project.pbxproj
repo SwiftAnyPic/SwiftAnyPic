@@ -32,8 +32,8 @@
 		C8CED75F1B6FBB9A006B6972 /* PAPCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CED75E1B6FBB9A006B6972 /* PAPCache.swift */; };
 		C8EAA7D21B696E7800711A04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EAA7D11B696E7800711A04 /* AppDelegate.swift */; };
 		C8EAA7D91B696E7800711A04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8EAA7D81B696E7800711A04 /* Assets.xcassets */; };
-		C8EAA7E71B696E7800711A04 /* SwiftAnyPicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EAA7E61B696E7800711A04 /* SwiftAnyPicTests.swift */; };
-		C8EAA7F21B696E7800711A04 /* SwiftAnyPicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EAA7F11B696E7800711A04 /* SwiftAnyPicUITests.swift */; };
+		C8EAA7E71B696E7800711A04 /* SwiftAnyPostTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EAA7E61B696E7800711A04 /* SwiftAnyPostTests.swift */; };
+		C8EAA7F21B696E7800711A04 /* SwiftAnyPostUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EAA7F11B696E7800711A04 /* SwiftAnyPostUITests.swift */; };
 		C8EAA8031B697F7300711A04 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EAA8021B697F7300711A04 /* Reachability.swift */; };
 		C8EAA8071B6985FC00711A04 /* PAPHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EAA8061B6985FC00711A04 /* PAPHomeViewController.swift */; };
 		C8EAA8091B69866100711A04 /* PAPPhotoTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EAA8081B69866100711A04 /* PAPPhotoTimelineViewController.swift */; };
@@ -89,12 +89,12 @@
 		C8EAA7D81B696E7800711A04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C8EAA7DD1B696E7800711A04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8EAA7E21B696E7800711A04 /* SwiftAnyPost.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftAnyPost.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C8EAA7E61B696E7800711A04 /* SwiftAnyPicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftAnyPicTests.swift; sourceTree = "<group>"; };
+		C8EAA7E61B696E7800711A04 /* SwiftAnyPostTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftAnyPostTests.swift; sourceTree = "<group>"; };
 		C8EAA7E81B696E7800711A04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8EAA7ED1B696E7800711A04 /* SwiftAnyPost.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftAnyPost.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C8EAA7F11B696E7800711A04 /* SwiftAnyPicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftAnyPicUITests.swift; sourceTree = "<group>"; };
+		C8EAA7F11B696E7800711A04 /* SwiftAnyPostUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftAnyPostUITests.swift; sourceTree = "<group>"; };
 		C8EAA7F31B696E7800711A04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C8EAA7FF1B6971DF00711A04 /* SwiftAnyPic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftAnyPic-Bridging-Header.h"; sourceTree = "<group>"; };
+		C8EAA7FF1B6971DF00711A04 /* SwiftAnyPost-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftAnyPost-Bridging-Header.h"; sourceTree = "<group>"; };
 		C8EAA8021B697F7300711A04 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		C8EAA8061B6985FC00711A04 /* PAPHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPHomeViewController.swift; sourceTree = "<group>"; };
 		C8EAA8081B69866100711A04 /* PAPPhotoTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPPhotoTimelineViewController.swift; sourceTree = "<group>"; };
@@ -233,8 +233,8 @@
 		C8EAA7C51B696E7800711A04 = {
 			isa = PBXGroup;
 			children = (
-				C8EAA7D01B696E7800711A04 /* SwiftAnyPic */,
-				C8EAA7E51B696E7800711A04 /* SwiftAnyPicTests */,
+				C8EAA7D01B696E7800711A04 /* SwiftAnyPost */,
+				C8EAA7E51B696E7800711A04 /* SwiftAnyPostTests */,
 				C8EAA7F01B696E7800711A04 /* SwiftAnyPicUITests */,
 				C8EAA7CF1B696E7800711A04 /* Products */,
 				6B84C56CF2EEC95067FAD323 /* Pods */,
@@ -252,7 +252,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C8EAA7D01B696E7800711A04 /* SwiftAnyPic */ = {
+		C8EAA7D01B696E7800711A04 /* SwiftAnyPost */ = {
 			isa = PBXGroup;
 			children = (
 				C8BE112D1B727C7C00EDFB4A /* Resources */,
@@ -264,29 +264,30 @@
 				C8481A441B70F31300E55085 /* PAPUtility.swift */,
 				C8CED75E1B6FBB9A006B6972 /* PAPCache.swift */,
 				C8EAA8021B697F7300711A04 /* Reachability.swift */,
-				C8EAA7FF1B6971DF00711A04 /* SwiftAnyPic-Bridging-Header.h */,
+				C8EAA7FF1B6971DF00711A04 /* SwiftAnyPost-Bridging-Header.h */,
 				C8EAA7D81B696E7800711A04 /* Assets.xcassets */,
 				C8EAA7DD1B696E7800711A04 /* Info.plist */,
 			);
-			path = SwiftAnyPic;
+			path = SwiftAnyPost;
 			sourceTree = "<group>";
 		};
-		C8EAA7E51B696E7800711A04 /* SwiftAnyPicTests */ = {
+		C8EAA7E51B696E7800711A04 /* SwiftAnyPostTests */ = {
 			isa = PBXGroup;
 			children = (
-				C8EAA7E61B696E7800711A04 /* SwiftAnyPicTests.swift */,
+				C8EAA7E61B696E7800711A04 /* SwiftAnyPostTests.swift */,
 				C8EAA7E81B696E7800711A04 /* Info.plist */,
 			);
-			path = SwiftAnyPicTests;
+			path = SwiftAnyPostTests;
 			sourceTree = "<group>";
 		};
 		C8EAA7F01B696E7800711A04 /* SwiftAnyPicUITests */ = {
 			isa = PBXGroup;
 			children = (
-				C8EAA7F11B696E7800711A04 /* SwiftAnyPicUITests.swift */,
+				C8EAA7F11B696E7800711A04 /* SwiftAnyPostUITests.swift */,
 				C8EAA7F31B696E7800711A04 /* Info.plist */,
 			);
-			path = SwiftAnyPicUITests;
+			name = SwiftAnyPicUITests;
+			path = SwiftAnyPostUITests;
 			sourceTree = "<group>";
 		};
 		C8EAA8041B6985BC00711A04 /* Controllers */ = {
@@ -549,7 +550,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8EAA7E71B696E7800711A04 /* SwiftAnyPicTests.swift in Sources */,
+				C8EAA7E71B696E7800711A04 /* SwiftAnyPostTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,7 +558,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8EAA7F21B696E7800711A04 /* SwiftAnyPicUITests.swift in Sources */,
+				C8EAA7F21B696E7800711A04 /* SwiftAnyPostUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,13 +671,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = SwiftAnyPic/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SwiftAnyPost/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teklabsco.SwiftAnypost;
 				PRODUCT_NAME = SwiftAnyPost;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SwiftAnyPic/SwiftAnyPic-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftAnyPost/SwiftAnyPost-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -691,13 +692,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = SwiftAnyPic/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SwiftAnyPost/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teklabsco.SwiftAnypost;
 				PRODUCT_NAME = SwiftAnyPost;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SwiftAnyPic/SwiftAnyPic-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftAnyPost/SwiftAnyPost-Bridging-Header.h";
 			};
 			name = Release;
 		};
