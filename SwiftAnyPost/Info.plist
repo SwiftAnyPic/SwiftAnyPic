@@ -56,7 +56,7 @@
 	<key>CFBundleVersion</key>
 	<string>${APP_VERSION}</string>
 	<key>FacebookAppID</key>
-	<string>231265150320768</string>
+	<string>1632534533681596</string>
 	<key>FacebookDisplayName</key>
 	<string>AnyPic</string>
 	<key>LSApplicationCategoryType</key>
@@ -70,30 +70,30 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-	  <key>NSExceptionDomains</key>
-	  <dict>
-	    <key>facebook.com</key>
-	    <dict>
-	      <key>NSIncludesSubdomains</key>
-	      <true/>
-	      <key>NSExceptionRequiresForwardSecrecy</key>
-	      <false/>
-	    </dict>
-	    <key>fbcdn.net</key>
-	    <dict>
-	      <key>NSIncludesSubdomains</key>
-	      <true/>
-	      <key>NSExceptionRequiresForwardSecrecy</key>
-	      <false/>
-	    </dict>
-	    <key>akamaihd.net</key>
-	    <dict>
-	      <key>NSIncludesSubdomains</key>
-	      <true/>
-	      <key>NSExceptionRequiresForwardSecrecy</key>
-	      <false/>
-	    </dict>
-	  </dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>akamaihd.net</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>facebook.com</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>fbcdn.net</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2015 Parse, Inc.</string>
@@ -124,7 +124,7 @@
 				<key>Blue</key>
 				<real>0.117841511964798</real>
 				<key>Green</key>
-				<real>0.1536859273910522</real>
+				<real>0.15368592739105219</real>
 				<key>Red</key>
 				<real>0.2008436918258667</real>
 			</dict>

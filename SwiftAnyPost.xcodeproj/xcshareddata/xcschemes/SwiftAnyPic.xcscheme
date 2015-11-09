@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C8EAA7CD1B696E7800711A04"
-               BuildableName = "SwiftAnyPic.app"
-               BlueprintName = "SwiftAnyPic"
-               ReferencedContainer = "container:SwiftAnyPic.xcodeproj">
+               BuildableName = "SwiftAnyPost.app"
+               BlueprintName = "SwiftAnyPost"
+               ReferencedContainer = "container:SwiftAnyPost.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C8EAA7E11B696E7800711A04"
-               BuildableName = "SwiftAnyPicTests.xctest"
-               BlueprintName = "SwiftAnyPicTests"
-               ReferencedContainer = "container:SwiftAnyPic.xcodeproj">
+               BuildableName = "SwiftAnyPost.xctest"
+               BlueprintName = "SwiftAnyPostTests"
+               ReferencedContainer = "container:SwiftAnyPost.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C8EAA7EC1B696E7800711A04"
-               BuildableName = "SwiftAnyPicUITests.xctest"
-               BlueprintName = "SwiftAnyPicUITests"
-               ReferencedContainer = "container:SwiftAnyPic.xcodeproj">
+               BuildableName = "SwiftAnyPost.xctest"
+               BlueprintName = "SwiftAnyPostUITests"
+               ReferencedContainer = "container:SwiftAnyPost.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C8EAA7CD1B696E7800711A04"
-            BuildableName = "SwiftAnyPic.app"
-            BlueprintName = "SwiftAnyPic"
-            ReferencedContainer = "container:SwiftAnyPic.xcodeproj">
+            BuildableName = "SwiftAnyPost.app"
+            BlueprintName = "SwiftAnyPost"
+            ReferencedContainer = "container:SwiftAnyPost.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C8EAA7CD1B696E7800711A04"
-            BuildableName = "SwiftAnyPic.app"
-            BlueprintName = "SwiftAnyPic"
-            ReferencedContainer = "container:SwiftAnyPic.xcodeproj">
+            BuildableName = "SwiftAnyPost.app"
+            BlueprintName = "SwiftAnyPost"
+            ReferencedContainer = "container:SwiftAnyPost.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C8EAA7CD1B696E7800711A04"
-            BuildableName = "SwiftAnyPic.app"
-            BlueprintName = "SwiftAnyPic"
-            ReferencedContainer = "container:SwiftAnyPic.xcodeproj">
+            BuildableName = "SwiftAnyPost.app"
+            BlueprintName = "SwiftAnyPost"
+            ReferencedContainer = "container:SwiftAnyPost.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
