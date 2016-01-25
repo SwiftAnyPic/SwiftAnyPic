@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/kwkhaw/SwiftAnyPic.svg?branch=master)](https://travis-ci.org/kwkhaw/SwiftAnyPic)
-[![](https://img.shields.io/github/issues-raw/kwkhaw/SwiftAnyPic.svg)]()
-[![GitHub license](https://img.shields.io/github/license/kwkhaw/SwiftAnyPic.svg)]()
+
+**Note: I no longer actively working on this project. If you encounter any problem, please open an issue and hopefully the community to help out. If you are interested to maintain this project, kindly contact me. :-)**
 
 # SwiftAnyPic
 Swift port of AnyPic project [https://github.com/ParsePlatform/Anypic](https://github.com/ParsePlatform/Anypic)
