@@ -1,12 +1,12 @@
 import Foundation
 import CoreGraphics
-import UIImage_AF_Additions
+import UIImageAFAdditions
 import ParseFacebookUtils
 
 class PAPUtility {
 
     // MARK:- PAPUtility
-    
+
     // MARK Like Photos
 
     class func likePhotoInBackground(photo: PFObject, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
@@ -22,14 +22,14 @@ class PAPUtility {
                     activity.deleteInBackground()
                 }
             }
-            
+
             // proceed to creating new like
             let likeActivity = PFObject(className: kPAPActivityClassKey)
             likeActivity.setObject(kPAPActivityTypeLike, forKey: kPAPActivityTypeKey)
             likeActivity.setObject(PFUser.currentUser()!, forKey: kPAPActivityFromUserKey)
             likeActivity.setObject(photo.objectForKey(kPAPPhotoUserKey)!, forKey: kPAPActivityToUserKey)
             likeActivity.setObject(photo, forKey: kPAPActivityPhotoKey)
-            
+
             let likeACL = PFACL(user: PFUser.currentUser()!)
             likeACL.setPublicReadAccess(true)
             likeACL.setWriteAccess(true, forUser: photo.objectForKey(kPAPPhotoUserKey) as! PFUser)
@@ -46,23 +46,23 @@ class PAPUtility {
                     if error == nil {
                         var likers = [PFUser]()
                         var commenters = [PFUser]()
-                        
+
                         var isLikedByCurrentUser = false
-                        
+
                         for activity in objects as! [PFObject] {
                             if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike && activity.objectForKey(kPAPActivityFromUserKey) != nil {
                                 likers.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
                             } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeComment && activity.objectForKey(kPAPActivityFromUserKey) != nil {
                                 commenters.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
                             }
-                            
+
                             if (activity.objectForKey(kPAPActivityFromUserKey) as? PFUser)?.objectId == PFUser.currentUser()!.objectId {
                                 if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
                                     isLikedByCurrentUser = true
                                 }
                             }
                         }
-                        
+
                         PAPCache.sharedCache.setAttributesForPhoto(photo, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser)
                     }
 
@@ -85,7 +85,7 @@ class PAPUtility {
 // FIXME: To be removed! this is synchronous!                    activity.delete()
                     activity.deleteInBackground()
                 }
-                
+
                 if completionBlock != nil {
                     completionBlock!(succeeded: true, error: nil)
                 }
@@ -94,29 +94,29 @@ class PAPUtility {
                 let query = PAPUtility.queryForActivitiesOnPhoto(photo, cachePolicy: PFCachePolicy.NetworkOnly)
                 query.findObjectsInBackgroundWithBlock { (objects, error) in
                     if error == nil {
-                        
+
                         var likers = [PFUser]()
                         var commenters = [PFUser]()
-                        
+
                         var isLikedByCurrentUser = false
-                        
+
                         for activity in objects as! [PFObject] {
                             if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
                                 likers.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
                             } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeComment {
                                 commenters.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
                             }
-                            
+
                             if (activity.objectForKey(kPAPActivityFromUserKey) as! PFUser).objectId == PFUser.currentUser()!.objectId {
                                 if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
                                     isLikedByCurrentUser = true
                                 }
                             }
                         }
-                        
+
                         PAPCache.sharedCache.setAttributesForPhoto(photo, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser)
                     }
-                    
+
                     NSNotificationCenter.defaultCenter().postNotificationName(PAPUtilityUserLikedUnlikedPhotoCallbackFinishedNotification, object: photo, userInfo: [PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey: false])
                 }
 
@@ -135,9 +135,9 @@ class PAPUtility {
         if newProfilePictureData.length == 0 {
             return
         }
-        
+
         let image = UIImage(data: newProfilePictureData)
-        
+
         let mediumImage: UIImage = image!.thumbnailImage(280, transparentBorder: 0, cornerRadius: 0, interpolationQuality: CGInterpolationQuality.High)
         let smallRoundedImage: UIImage = image!.thumbnailImage(64, transparentBorder: 0, cornerRadius: 0, interpolationQuality: CGInterpolationQuality.Low)
 
@@ -153,7 +153,7 @@ class PAPUtility {
                 }
             }
         }
-        
+
         if smallRoundedImageData.length > 0 {
             let fileSmallRoundedImage: PFFile = PFFile(data: smallRoundedImageData)
             fileSmallRoundedImage.saveInBackgroundWithBlock { (succeeded, error) in
@@ -171,25 +171,25 @@ class PAPUtility {
         let facebookId = user.objectForKey(kPAPUserFacebookIDKey) as? String
         return (facebookId != nil && facebookId!.length > 0 && facebookId == PFFacebookUtils.session()!.accessTokenData.userID)
     }
-   
+
     class func userHasProfilePictures(user: PFUser) -> Bool {
         let profilePictureMedium: PFFile? = user.objectForKey(kPAPUserProfilePicMediumKey) as? PFFile
         let profilePictureSmall: PFFile? = user.objectForKey(kPAPUserProfilePicSmallKey) as? PFFile
-        
+
         return profilePictureMedium != nil && profilePictureSmall != nil
     }
 
     class func defaultProfilePicture() -> UIImage? {
         return UIImage(named: "AvatarPlaceholderBig.png")
     }
-    
+
     // MARK Display Name
 
     class func firstNameForDisplayName(displayName: String?) -> String {
         if (displayName == nil || displayName!.length == 0) {
             return "Someone"
         }
-        
+
         let displayNameComponents: [String] = displayName!.componentsSeparatedByString(" ")
         var firstName = displayNameComponents[0]
         if firstName.length > 100 {
@@ -205,16 +205,16 @@ class PAPUtility {
         if user.objectId == PFUser.currentUser()!.objectId {
             return
         }
-        
+
         let followActivity = PFObject(className: kPAPActivityClassKey)
         followActivity.setObject(PFUser.currentUser()!, forKey: kPAPActivityFromUserKey)
         followActivity.setObject(user, forKey: kPAPActivityToUserKey)
         followActivity.setObject(kPAPActivityTypeFollow, forKey: kPAPActivityTypeKey)
-        
+
         let followACL = PFACL(user: PFUser.currentUser()!)
         followACL.setPublicReadAccess(true)
         followActivity.ACL = followACL
-        
+
         followActivity.saveInBackgroundWithBlock { (succeeded, error) in
             if completionBlock != nil {
                 completionBlock!(succeeded: succeeded.boolValue, error: error)
@@ -227,16 +227,16 @@ class PAPUtility {
         if user.objectId == PFUser.currentUser()!.objectId {
             return
         }
-        
+
         let followActivity = PFObject(className: kPAPActivityClassKey)
         followActivity.setObject(PFUser.currentUser()!, forKey: kPAPActivityFromUserKey)
         followActivity.setObject(user, forKey: kPAPActivityToUserKey)
         followActivity.setObject(kPAPActivityTypeFollow, forKey: kPAPActivityTypeKey)
-        
+
         let followACL = PFACL(user: PFUser.currentUser()!)
         followACL.setPublicReadAccess(true)
         followActivity.ACL = followACL
-        
+
         followActivity.saveEventually(completionBlock)
         PAPCache.sharedCache.setFollowStatus(true, user: user)
     }
@@ -278,18 +278,18 @@ class PAPUtility {
             PAPCache.sharedCache.setFollowStatus(false, user: user)
         }
     }
- 
+
     // MARK Activities
 
     class func queryForActivitiesOnPhoto(photo: PFObject, cachePolicy: PFCachePolicy) -> PFQuery {
         let queryLikes: PFQuery = PFQuery(className: kPAPActivityClassKey)
         queryLikes.whereKey(kPAPActivityPhotoKey, equalTo: photo)
         queryLikes.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeLike)
-        
+
         let queryComments = PFQuery(className: kPAPActivityClassKey)
         queryComments.whereKey(kPAPActivityPhotoKey, equalTo: photo)
         queryComments.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeComment)
-        
+
         let query = PFQuery.orQueryWithSubqueries([queryLikes,queryComments])
         query.cachePolicy = cachePolicy
         query.includeKey(kPAPActivityFromUserKey)
@@ -303,7 +303,7 @@ class PAPUtility {
     class func drawSideAndBottomDropShadowForRect(rect: CGRect, inContext context: CGContextRef) {
         // Push the context
         CGContextSaveGState(context)
-        
+
         // Set the clipping path to remove the rect drawn by drawing the shadow
         let boundingRect: CGRect = CGContextGetClipBoundingBox(context)
         CGContextAddRect(context, boundingRect)
@@ -311,7 +311,7 @@ class PAPUtility {
         CGContextEOClip(context)
         // Also clip the top and bottom
         CGContextClipToRect(context, CGRectMake(rect.origin.x - 10.0, rect.origin.y, rect.size.width + 20.0, rect.size.height + 10.0))
-        
+
         // Draw shadow
         UIColor.blackColor().setFill()
         CGContextSetShadow(context, CGSizeMake(0.0, 0.0), 7.0)
@@ -319,11 +319,11 @@ class PAPUtility {
         // Save context
         CGContextRestoreGState(context)
     }
-    
+
     class func drawSideAndTopDropShadowForRect(rect: CGRect, inContext context: CGContextRef) {
         // Push the context
         CGContextSaveGState(context)
-        
+
         // Set the clipping path to remove the rect drawn by drawing the shadow
         let boundingRect: CGRect = CGContextGetClipBoundingBox(context)
         CGContextAddRect(context, boundingRect)
@@ -331,7 +331,7 @@ class PAPUtility {
         CGContextEOClip(context)
         // Also clip the top and bottom
         CGContextClipToRect(context, CGRectMake(rect.origin.x - 10.0, rect.origin.y - 10.0, rect.size.width + 20.0, rect.size.height + 10.0))
-        
+
         // Draw shadow
         UIColor.blackColor().setFill()
         CGContextSetShadow(context, CGSizeMake(0.0, 0.0), 7.0)
@@ -341,9 +341,9 @@ class PAPUtility {
     }
 
     class func drawSideDropShadowForRect(rect: CGRect, inContext context: CGContextRef) {
-        // Push the context 
+        // Push the context
         CGContextSaveGState(context)
-        
+
         // Set the clipping path to remove the rect drawn by drawing the shadow
         let boundingRect: CGRect = CGContextGetClipBoundingBox(context)
         CGContextAddRect(context, boundingRect)
@@ -351,7 +351,7 @@ class PAPUtility {
         CGContextEOClip(context)
         // Also clip the top and bottom
         CGContextClipToRect(context, CGRectMake(rect.origin.x - 10.0, rect.origin.y, rect.size.width + 20.0, rect.size.height))
-        
+
         // Draw shadow
         UIColor.blackColor().setFill()
         CGContextSetShadow(context, CGSizeMake(0.0, 0.0), 7.0)
