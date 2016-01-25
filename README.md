@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/kwkhaw/SwiftAnyPic.svg?branch=master)](https://travis-ci.org/kwkhaw/SwiftAnyPic)
 
-**Note: I no longer actively working on this project. If you encounter any problem, please open an issue and hopefully the community to help out. If you are interested to maintain this project, kindly contact me. :-)**
+**Note: I no longer actively working on this project. If you encounter any problem, please open an issue and hopefully the community will help out. If you are interested to maintain this project, kindly contact me. :-)**
 
 # SwiftAnyPic
 Swift port of AnyPic project [https://github.com/ParsePlatform/Anypic](https://github.com/ParsePlatform/Anypic)
