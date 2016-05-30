@@ -1,0 +1,97 @@
+PODS:
+  - Bolts (1.2.0):
+    - Bolts/AppLinks (= 1.2.0)
+    - Bolts/Tasks (= 1.2.0)
+  - Bolts/AppLinks (1.2.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.2.0)
+  - Facebook-iOS-SDK (3.24.4):
+    - Bolts (~> 1.2)
+  - FormatterKit (1.8.1):
+    - FormatterKit/AddressFormatter (= 1.8.1)
+    - FormatterKit/ArrayFormatter (= 1.8.1)
+    - FormatterKit/ColorFormatter (= 1.8.1)
+    - FormatterKit/LocationFormatter (= 1.8.1)
+    - FormatterKit/NameFormatter (= 1.8.1)
+    - FormatterKit/OrdinalNumberFormatter (= 1.8.1)
+    - FormatterKit/Resources (= 1.8.1)
+    - FormatterKit/TimeIntervalFormatter (= 1.8.1)
+    - FormatterKit/UnitOfInformationFormatter (= 1.8.1)
+    - FormatterKit/URLRequestFormatter (= 1.8.1)
+  - FormatterKit/AddressFormatter (1.8.1):
+    - FormatterKit/Resources
+  - FormatterKit/ArrayFormatter (1.8.1):
+    - FormatterKit/Resources
+  - FormatterKit/ColorFormatter (1.8.1):
+    - FormatterKit/Resources
+  - FormatterKit/LocationFormatter (1.8.1):
+    - FormatterKit/Resources
+  - FormatterKit/NameFormatter (1.8.1):
+    - FormatterKit/Resources
+  - FormatterKit/OrdinalNumberFormatter (1.8.1):
+    - FormatterKit/Resources
+  - FormatterKit/Resources (1.8.1)
+  - FormatterKit/TimeIntervalFormatter (1.8.1):
+    - FormatterKit/Resources
+  - FormatterKit/UnitOfInformationFormatter (1.8.1):
+    - FormatterKit/Resources
+  - FormatterKit/URLRequestFormatter (1.8.1):
+    - FormatterKit/Resources
+  - MBProgressHUD (0.9.2)
+  - Parse (1.7.5.3):
+    - Bolts/Tasks (>= 1.2.0)
+  - ParseCrashReporting (1.7.5.3):
+    - Bolts/Tasks (>= 1.2.0)
+    - Parse (~> 1.7.5.3)
+  - ParseFacebookUtils (1.7.5.3):
+    - Bolts/Tasks (>= 1.2.0)
+    - Facebook-iOS-SDK (~> 3.23)
+    - Parse (~> 1.7.5.3)
+  - ParseUI (1.1.4):
+    - Parse (~> 1.7)
+  - Synchronized (2.0.1)
+  - UIImageAFAdditions (0.1)
+  - UIImageEffects (0.0.1)
+
+DEPENDENCIES:
+  - Bolts (from `https://github.com/kwkhaw/Bolts-iOS.git`)
+  - FormatterKit (~> 1.8.0)
+  - MBProgressHUD (~> 0.9.1)
+  - Parse (~> 1.7.5)
+  - ParseCrashReporting (~> 1.7.5)
+  - ParseFacebookUtils (~> 1.7.5)
+  - ParseUI (= 1.1.4)
+  - Synchronized (~> 2.0.0)
+  - UIImageAFAdditions (from `https://github.com/teklabs/UIImageAFAdditions.git`)
+  - UIImageEffects (~> 0.0.1)
+
+EXTERNAL SOURCES:
+  Bolts:
+    :git: https://github.com/kwkhaw/Bolts-iOS.git
+  UIImageAFAdditions:
+    :git: https://github.com/teklabs/UIImageAFAdditions.git
+
+CHECKOUT OPTIONS:
+  Bolts:
+    :commit: 412f62aa979dff584bb7e7b7685bc95d907fd5ca
+    :git: https://github.com/kwkhaw/Bolts-iOS.git
+  UIImageAFAdditions:
+    :commit: bd07487284ad76e611fcdcd6401ae409a1d9a1fd
+    :git: https://github.com/teklabs/UIImageAFAdditions.git
+
+SPEC CHECKSUMS:
+  Bolts: c4173988ebd9d67397a18f7142d1414884d2ac9b
+  Facebook-iOS-SDK: 5a7c414a084708220b72d5fd016f2cf3eb6deda4
+  FormatterKit: 11ad17b983200629246a5a466f6f1bfa2df823cb
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
+  ParseCrashReporting: 36d2e2770d7502d943b81c013acd5193946ced46
+  ParseFacebookUtils: 008a24dc35884519ed6a6750648beb5149f1fad9
+  ParseUI: d1228541b02a36a7354c8f47747f5f7a89cf1ff0
+  Synchronized: 727f6307a92ea6e3a2fb4e5a345daad8878dd050
+  UIImageAFAdditions: bdb543889f97aea5cc9a8d0c985c03bb8b4ceb96
+  UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
+
+PODFILE CHECKSUM: e1db58f5633d8efba00bcfaaf52a154f91f17023
+
+COCOAPODS: 1.0.0
