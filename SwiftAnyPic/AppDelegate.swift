@@ -286,7 +286,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
 
         // If the push notification payload references a photo, we will attempt to push this view controller into view
         if let photoObjectId = remoteNotificationPayload[kPAPPushPayloadPhotoObjectIdKey] as? String where photoObjectId.characters.count > 0 {
-            shouldNavigateToPhoto(PFObject(withoutDataWithClassName: kPAPPhotoClassKey, objectId: photoObjectId))
+            shouldNavigateToPhoto(PFObject(outDataWithObjectId: photoObjectId))
             return
         }
         
@@ -332,7 +332,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
                 let photoObjectId: String = url.fragment!.subString(4, length: 10)
                 if photoObjectId.length > 0 {
                     print("WOOP: %@", photoObjectId)
-                    shouldNavigateToPhoto(PFObject(withoutDataWithClassName: kPAPPhotoClassKey, objectId: photoObjectId))
+                    shouldNavigateToPhoto(PFObject(outDataWithObjectId: photoObjectId))
                     return true
                 }
             }
