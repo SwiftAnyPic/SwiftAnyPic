@@ -157,10 +157,10 @@ class PAPPhotoDetailsHeaderView: UIView {
             
             let numOfPics: Int = Int(numLikePics) > likeUsers!.count ? likeUsers!.count : Int(numLikePics)
 
-            for var i = 0; i < numOfPics; i++ {
+            for i in 0 ..< numOfPics {
                 let profilePic = PAPProfileImageView()
                 profilePic.frame = CGRectMake(likeProfileXBase + CGFloat(i) * (likeProfileXSpace + likeProfileDim), likeProfileY, likeProfileDim, likeProfileDim)
-                profilePic.profileButton!.addTarget(self, action: Selector("didTapLikerButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+                profilePic.profileButton!.addTarget(self, action: #selector(PAPPhotoDetailsHeaderView.didTapLikerButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 profilePic.profileButton!.tag = i
 
                 
@@ -190,7 +190,7 @@ class PAPPhotoDetailsHeaderView: UIView {
     func reloadLikeBar() {
         likeUsers = PAPCache.sharedCache.likersForPhoto(self.photo!)
         self.setLikeButtonState(PAPCache.sharedCache.isPhotoLikedByCurrentUser(self.photo!))
-        likeButton!.addTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        likeButton!.addTarget(self, action: #selector(PAPPhotoDetailsHeaderView.didTapLikePhotoButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
     }
 
     // MARK:- ()
@@ -233,7 +233,7 @@ class PAPPhotoDetailsHeaderView: UIView {
 
             avatarImageView.backgroundColor = UIColor.clearColor()
             avatarImageView.opaque = false
-            avatarImageView.profileButton!.addTarget(self, action: Selector("didTapUserNameButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+            avatarImageView.profileButton!.addTarget(self, action: #selector(PAPPhotoDetailsHeaderView.didTapUserNameButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             avatarImageView.contentMode = UIViewContentMode.ScaleAspectFill
             avatarImageView.layer.cornerRadius = 66.0
             avatarImageView.layer.masksToBounds = true
@@ -250,7 +250,7 @@ class PAPPhotoDetailsHeaderView: UIView {
             userButton.setTitleColor(UIColor(red: 34.0/255.0, green: 34.0/255.0, blue: 34.0/255.0, alpha: 1.0), forState: UIControlState.Normal)
             userButton.setTitleColor(UIColor(red: 114.0/255.0, green: 114.0/255.0, blue: 114.0/255.0, alpha: 1.0), forState: UIControlState.Highlighted)
             userButton.titleLabel!.lineBreakMode = NSLineBreakMode.ByTruncatingTail
-            userButton.addTarget(self, action: Selector("didTapUserNameButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+            userButton.addTarget(self, action: #selector(PAPPhotoDetailsHeaderView.didTapUserNameButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             
             // we resize the button to fit the user's name to avoid having a huge touch area
             let userButtonPoint: CGPoint = CGPointMake(50.0, 6.0)
@@ -303,7 +303,7 @@ class PAPPhotoDetailsHeaderView: UIView {
         likeButton!.adjustsImageWhenHighlighted = false
         likeButton!.setBackgroundImage(UIImage(named: "ButtonLike.png"), forState: UIControlState.Normal)
         likeButton!.setBackgroundImage(UIImage(named: "ButtonLikeSelected.png"), forState: UIControlState.Selected)
-        likeButton!.addTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        likeButton!.addTarget(self, action: #selector(PAPPhotoDetailsHeaderView.didTapLikePhotoButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         likeBarView!.addSubview(likeButton!)
         
         self.reloadLikeBar()
@@ -315,7 +315,7 @@ class PAPPhotoDetailsHeaderView: UIView {
 
     func didTapLikePhotoButtonAction(button: UIButton) {
         let liked: Bool = !button.selected
-        button.removeTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        button.removeTarget(self, action: #selector(PAPPhotoDetailsHeaderView.didTapLikePhotoButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.setLikeButtonState(liked)
 
         let originalLikeUsersArray = likeUsers
@@ -342,7 +342,7 @@ class PAPPhotoDetailsHeaderView: UIView {
         if (liked) {
             PAPUtility.likePhotoInBackground(self.photo!, block: { (succeeded, error) in
                 if !succeeded {
-                    button.addTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+                    button.addTarget(self, action: #selector(PAPPhotoDetailsHeaderView.didTapLikePhotoButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                     self.likeUsers = originalLikeUsersArray
                     self.setLikeButtonState(false)
                 }
@@ -350,7 +350,7 @@ class PAPPhotoDetailsHeaderView: UIView {
         } else {
             PAPUtility.unlikePhotoInBackground(self.photo!, block: { (succeeded, error) in
                 if !succeeded {
-                    button.addTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+                    button.addTarget(self, action: #selector(PAPPhotoDetailsHeaderView.didTapLikePhotoButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                     self.likeUsers = originalLikeUsersArray
                     self.setLikeButtonState(true)
                 }
@@ -362,13 +362,13 @@ class PAPPhotoDetailsHeaderView: UIView {
 
     func didTapLikerButtonAction(button: UIButton) {
         let user: PFUser = likeUsers![button.tag]
-        if delegate != nil && delegate!.respondsToSelector(Selector("photoDetailsHeaderView:didTapUserButton:user:")) {
+        if delegate != nil && delegate!.respondsToSelector(#selector(PAPPhotoDetailsHeaderViewDelegate.photoDetailsHeaderView(_:didTapUserButton:user:))) {
             delegate!.photoDetailsHeaderView(self, didTapUserButton: button, user: user)
         }    
     }
 
     func didTapUserNameButtonAction(button: UIButton) {
-        if delegate != nil && delegate!.respondsToSelector(Selector("photoDetailsHeaderView:didTapUserButton:user:")) {
+        if delegate != nil && delegate!.respondsToSelector(#selector(PAPPhotoDetailsHeaderViewDelegate.photoDetailsHeaderView(_:didTapUserButton:user:))) {
             delegate!.photoDetailsHeaderView(self, didTapUserButton: button, user: self.photographer!)
         }    
     }

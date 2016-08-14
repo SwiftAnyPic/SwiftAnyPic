@@ -277,12 +277,12 @@ class PAPAccountViewController: PAPPhotoTimelineViewController {
     }
 
     func configureFollowButton() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Follow", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("followButtonAction:"))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Follow", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(PAPAccountViewController.followButtonAction(_:)))
         PAPCache.sharedCache.setFollowStatus(false, user: self.user!)
     }
 
     func configureUnfollowButton() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Unfollow", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("unfollowButtonAction:"))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Unfollow", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(PAPAccountViewController.unfollowButtonAction(_:)))
         PAPCache.sharedCache.setFollowStatus(true, user: self.user!)
     }
 }

@@ -52,7 +52,7 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "TitleFindFriends.png"))
     
         if self.navigationController!.viewControllers[0] == self {
-            let dismissLeftBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("dismissPresentingViewController"))
+            let dismissLeftBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(PAPFindFriendsViewController.dismissPresentingViewController))
             self.navigationItem.leftBarButtonItem = dismissLeftBarButtonItem
         } else {
             self.navigationItem.leftBarButtonItem = nil
@@ -63,7 +63,7 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
             self.headerView!.backgroundColor = UIColor.blackColor()
             let clearButton = UIButton(type: UIButtonType.Custom)
             clearButton.backgroundColor = UIColor.clearColor()
-            clearButton.addTarget(self, action: Selector("inviteFriendsButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+            clearButton.addTarget(self, action: #selector(PAPFindFriendsViewController.inviteFriendsButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             clearButton.frame = self.headerView!.frame
             self.headerView!.addSubview(clearButton)
             let inviteString = NSLocalizedString("Invite friends", comment: "Invite friends")
@@ -384,10 +384,10 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
 
         let popTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(0.01 * Double(NSEC_PER_SEC)))
         dispatch_after(popTime, dispatch_get_main_queue(), {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Unfollow All", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("unfollowAllFriendsButtonAction:"))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Unfollow All", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(PAPFindFriendsViewController.unfollowAllFriendsButtonAction(_:)))
 
             var indexPaths = Array<NSIndexPath>(count: self.objects!.count, repeatedValue: NSIndexPath())
-            for var r = 0; r < self.objects!.count; r++ {
+            for var r = 0; r < self.objects!.count; r += 1 {
                 let user: PFObject = self.objects![r] as! PFObject
                 let indexPath: NSIndexPath = NSIndexPath(forRow: r, inSection: 0)
                 let cell: PAPFindFriendsCell? = self.tableView(self.tableView, cellForRowAtIndexPath: indexPath, object: user) as? PAPFindFriendsCell
@@ -398,7 +398,7 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
             self.tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.None)
             MBProgressHUD.hideAllHUDsForView(UIApplication.sharedApplication().keyWindow, animated: true)
 
-            let timer: NSTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("followUsersTimerFired:"), userInfo: nil, repeats: false)
+            let timer: NSTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PAPFindFriendsViewController.followUsersTimerFired(_:)), userInfo: nil, repeats: false)
             PAPUtility.followUsersEventually(self.objects as! [PFUser], block: { (succeeded, error) in
                 // note -- this block is called once for every user that is followed successfully. We use a timer to only execute the completion block once no more saveEventually blocks have been called in 2 seconds
                 timer.fireDate = NSDate(timeIntervalSinceNow: 2.0)
@@ -417,7 +417,7 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Follow All", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("followAllFriendsButtonAction:"))
 
             var indexPaths: [NSIndexPath] = Array<NSIndexPath>(count: self.objects!.count, repeatedValue: NSIndexPath())
-            for var r = 0; r < self.objects!.count; r++ {
+            for r in 0 ..< self.objects!.count {
                 let user: PFObject = self.objects![r] as! PFObject
                 let indexPath: NSIndexPath = NSIndexPath(forRow: r, inSection: 0)
                 let cell: PAPFindFriendsCell = self.tableView(self.tableView, cellForRowAtIndexPath: indexPath, object: user) as! PAPFindFriendsCell
@@ -455,11 +455,11 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
     }
 
     func configureUnfollowAllButton() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Unfollow All", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("unfollowAllFriendsButtonAction:"))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Unfollow All", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(PAPFindFriendsViewController.unfollowAllFriendsButtonAction(_:)))
     }
 
     func configureFollowAllButton() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Follow All", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("followAllFriendsButtonAction:"))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Follow All", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(PAPFindFriendsViewController.followAllFriendsButtonAction(_:)))
     }
 
     func presentMailComposeViewController(recipient: String) {

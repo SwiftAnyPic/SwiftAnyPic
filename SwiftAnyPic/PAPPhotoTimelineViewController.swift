@@ -62,12 +62,12 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
         self.tableView.backgroundView = texturedBackgroundView
 
         let defaultNotificationCenter = NSNotificationCenter.defaultCenter()
-        defaultNotificationCenter.addObserver(self, selector: Selector("userDidPublishPhoto:"), name: PAPTabBarControllerDidFinishEditingPhotoNotification, object: nil)
-        defaultNotificationCenter.addObserver(self, selector: Selector("userFollowingChanged:"), name: PAPUtilityUserFollowingChangedNotification, object: nil)
-        defaultNotificationCenter.addObserver(self, selector: Selector("userDidDeletePhoto:"), name: PAPPhotoDetailsViewControllerUserDeletedPhotoNotification, object: nil)
-        defaultNotificationCenter.addObserver(self, selector: Selector("userDidLikeOrUnlikePhoto:"), name: PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotification, object: nil)
-        defaultNotificationCenter.addObserver(self, selector: Selector("userDidLikeOrUnlikePhoto:"), name: PAPUtilityUserLikedUnlikedPhotoCallbackFinishedNotification, object: nil)
-        defaultNotificationCenter.addObserver(self, selector: Selector("userDidCommentOnPhoto:"), name: PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification, object: nil)
+        defaultNotificationCenter.addObserver(self, selector: #selector(PAPPhotoTimelineViewController.userDidPublishPhoto(_:)), name: PAPTabBarControllerDidFinishEditingPhotoNotification, object: nil)
+        defaultNotificationCenter.addObserver(self, selector: #selector(PAPPhotoTimelineViewController.userFollowingChanged(_:)), name: PAPUtilityUserFollowingChangedNotification, object: nil)
+        defaultNotificationCenter.addObserver(self, selector: #selector(PAPPhotoTimelineViewController.userDidDeletePhoto(_:)), name: PAPPhotoDetailsViewControllerUserDeletedPhotoNotification, object: nil)
+        defaultNotificationCenter.addObserver(self, selector: #selector(PAPPhotoTimelineViewController.userDidLikeOrUnlikePhoto(_:)), name: PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotification, object: nil)
+        defaultNotificationCenter.addObserver(self, selector: #selector(PAPPhotoTimelineViewController.userDidLikeOrUnlikePhoto(_:)), name: PAPUtilityUserLikedUnlikedPhotoCallbackFinishedNotification, object: nil)
+        defaultNotificationCenter.addObserver(self, selector: #selector(PAPPhotoTimelineViewController.userDidCommentOnPhoto(_:)), name: PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification, object: nil)
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -225,7 +225,7 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
 
             if cell == nil {
                 cell = PAPPhotoCell(style: UITableViewCellStyle.Default, reuseIdentifier: CellIdentifier)
-                cell!.photoButton!.addTarget(self, action: Selector("didTapOnPhotoAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+                cell!.photoButton!.addTarget(self, action: #selector(PAPPhotoTimelineViewController.didTapOnPhotoAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             }
 
             cell!.photoButton!.tag = index
@@ -295,11 +295,11 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
         
         var likeCount: Int = Int(button.titleLabel!.text!)!
         if (liked) {
-            likeCount++
+            likeCount += 1
             PAPCache.sharedCache.incrementLikerCountForPhoto(photo)
         } else {
             if likeCount > 0 {
-                likeCount--
+                likeCount -= 1
             }
             PAPCache.sharedCache.decrementLikerCountForPhoto(photo)
         }
@@ -436,7 +436,7 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
     }
 
     func indexPathForObject(targetObject: PFObject) -> NSIndexPath? {
-        for var i = 0; i < self.objects!.count; i++ {
+        for i in 0 ..< self.objects!.count {
             let object: PFObject = self.objects![i] as! PFObject
             if object.objectId == targetObject.objectId {
                 return NSIndexPath(forRow: i*2+1, inSection: 0)

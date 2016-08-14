@@ -13,14 +13,14 @@ class PAPHomeViewController: PAPPhotoTimelineViewController {
         
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "LogoNavigationBar.png"))
 
-        self.navigationItem.rightBarButtonItem = PAPSettingsButtonItem(target: self, action: Selector("settingsButtonAction:"))
+        self.navigationItem.rightBarButtonItem = PAPSettingsButtonItem(target: self, action: #selector(PAPHomeViewController.settingsButtonAction(_:)))
         
         self.blankTimelineView = UIView(frame: self.tableView.bounds)
         
         let button = UIButton(type: UIButtonType.Custom)
         button.frame = CGRectMake(33.0, 96.0, 253.0, 173.0)
         button.setBackgroundImage(UIImage(named: "HomeTimelineBlank.png"), forState: UIControlState.Normal)
-        button.addTarget(self, action: Selector("inviteFriendsButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(PAPHomeViewController.inviteFriendsButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.blankTimelineView!.addSubview(button)
     }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		165C4E5A881BA0A95649CF35 /* libPods-SwiftAnyPicTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FCB972F554A97FA94E739A4 /* libPods-SwiftAnyPicTests.a */; };
+		1918CCB80327B88ACAC81EE3 /* libPods-SwiftAnyPicUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB4DFC75DD70A46FF4844EF /* libPods-SwiftAnyPicUITests.a */; };
 		61759D05529651EC03AFDE93 /* Pods_SwiftAnyPic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396F1F06786D6995A9901EE0 /* Pods_SwiftAnyPic.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C81E05401B73AC79004E781D /* PAPSettingsButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81E053F1B73AC79004E781D /* PAPSettingsButtonItem.swift */; };
 		C81E05431B73B6F2004E781D /* PAPFindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81E05421B73B6F2004E781D /* PAPFindFriendsViewController.swift */; };
@@ -58,9 +60,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0EFBD68A46F0134263588F19 /* Pods-SwiftAnyPicUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAnyPicUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftAnyPicUITests/Pods-SwiftAnyPicUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		28FB677C87F8FDDB4C0346D2 /* Pods-SwiftAnyPic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAnyPic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftAnyPic/Pods-SwiftAnyPic.debug.xcconfig"; sourceTree = "<group>"; };
 		396F1F06786D6995A9901EE0 /* Pods_SwiftAnyPic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftAnyPic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ADA8303B756BC5DD428733E /* Pods-SwiftAnyPicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAnyPicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftAnyPicTests/Pods-SwiftAnyPicTests.release.xcconfig"; sourceTree = "<group>"; };
+		3FCB972F554A97FA94E739A4 /* libPods-SwiftAnyPicTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftAnyPicTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CEA41699D792626EE2D19DE /* Pods-SwiftAnyPicUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAnyPicUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftAnyPicUITests/Pods-SwiftAnyPicUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8449F14195DB7832B3D99A0B /* Pods-SwiftAnyPic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAnyPic.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftAnyPic/Pods-SwiftAnyPic.release.xcconfig"; sourceTree = "<group>"; };
+		8DB4DFC75DD70A46FF4844EF /* libPods-SwiftAnyPicUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftAnyPicUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9D9D31C3CB342780D33F16C /* Pods-SwiftAnyPicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAnyPicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftAnyPicTests/Pods-SwiftAnyPicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C81E053F1B73AC79004E781D /* PAPSettingsButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPSettingsButtonItem.swift; sourceTree = "<group>"; };
 		C81E05421B73B6F2004E781D /* PAPFindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPFindFriendsViewController.swift; sourceTree = "<group>"; };
 		C81E05441B73B923004E781D /* PAPFindFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPFindFriendsCell.swift; sourceTree = "<group>"; };
@@ -114,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				165C4E5A881BA0A95649CF35 /* libPods-SwiftAnyPicTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1918CCB80327B88ACAC81EE3 /* libPods-SwiftAnyPicUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +142,10 @@
 			children = (
 				28FB677C87F8FDDB4C0346D2 /* Pods-SwiftAnyPic.debug.xcconfig */,
 				8449F14195DB7832B3D99A0B /* Pods-SwiftAnyPic.release.xcconfig */,
+				B9D9D31C3CB342780D33F16C /* Pods-SwiftAnyPicTests.debug.xcconfig */,
+				3ADA8303B756BC5DD428733E /* Pods-SwiftAnyPicTests.release.xcconfig */,
+				0EFBD68A46F0134263588F19 /* Pods-SwiftAnyPicUITests.debug.xcconfig */,
+				7CEA41699D792626EE2D19DE /* Pods-SwiftAnyPicUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -141,6 +155,8 @@
 			children = (
 				C8481A461B70FA4600E55085 /* CoreGraphics.framework */,
 				396F1F06786D6995A9901EE0 /* Pods_SwiftAnyPic.framework */,
+				3FCB972F554A97FA94E739A4 /* libPods-SwiftAnyPicTests.a */,
+				8DB4DFC75DD70A46FF4844EF /* libPods-SwiftAnyPicUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -341,12 +357,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C8EAA7F61B696E7800711A04 /* Build configuration list for PBXNativeTarget "SwiftAnyPic" */;
 			buildPhases = (
-				32B47A72DCD19795E8DA755B /* Check Pods Manifest.lock */,
+				32B47A72DCD19795E8DA755B /* [CP] Check Pods Manifest.lock */,
 				C8EAA7CA1B696E7800711A04 /* Sources */,
 				C8EAA7CB1B696E7800711A04 /* Frameworks */,
 				C8EAA7CC1B696E7800711A04 /* Resources */,
-				2E67BEEBF02F6431EC07A78B /* Copy Pods Resources */,
-				8E87B50945DD3B42A6B759AD /* Embed Pods Frameworks */,
+				2E67BEEBF02F6431EC07A78B /* [CP] Copy Pods Resources */,
+				8E87B50945DD3B42A6B759AD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -361,9 +377,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C8EAA7F91B696E7800711A04 /* Build configuration list for PBXNativeTarget "SwiftAnyPicTests" */;
 			buildPhases = (
+				7BA47FC2760EA7E1A6AAD9D6 /* [CP] Check Pods Manifest.lock */,
 				C8EAA7DE1B696E7800711A04 /* Sources */,
 				C8EAA7DF1B696E7800711A04 /* Frameworks */,
 				C8EAA7E01B696E7800711A04 /* Resources */,
+				00B578288D82C4E2B1112DE7 /* [CP] Embed Pods Frameworks */,
+				E5B98C0C5BA6972192CE1530 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -379,9 +398,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C8EAA7FC1B696E7800711A04 /* Build configuration list for PBXNativeTarget "SwiftAnyPicUITests" */;
 			buildPhases = (
+				8D80C1667D5A0F4BAE611586 /* [CP] Check Pods Manifest.lock */,
 				C8EAA7E91B696E7800711A04 /* Sources */,
 				C8EAA7EA1B696E7800711A04 /* Frameworks */,
 				C8EAA7EB1B696E7800711A04 /* Resources */,
+				7555E3DC64335ABD0E7F1D26 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -462,14 +483,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2E67BEEBF02F6431EC07A78B /* Copy Pods Resources */ = {
+		00B578288D82C4E2B1112DE7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftAnyPicTests/Pods-SwiftAnyPicTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2E67BEEBF02F6431EC07A78B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,14 +513,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftAnyPic/Pods-SwiftAnyPic-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		32B47A72DCD19795E8DA755B /* Check Pods Manifest.lock */ = {
+		32B47A72DCD19795E8DA755B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,19 +528,79 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		8E87B50945DD3B42A6B759AD /* Embed Pods Frameworks */ = {
+		7555E3DC64335ABD0E7F1D26 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftAnyPicUITests/Pods-SwiftAnyPicUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7BA47FC2760EA7E1A6AAD9D6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8D80C1667D5A0F4BAE611586 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8E87B50945DD3B42A6B759AD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftAnyPic/Pods-SwiftAnyPic-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5B98C0C5BA6972192CE1530 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftAnyPicTests/Pods-SwiftAnyPicTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -694,6 +790,7 @@
 		};
 		C8EAA7FA1B696E7800711A04 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9D9D31C3CB342780D33F16C /* Pods-SwiftAnyPicTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SwiftAnyPicTests/Info.plist;
@@ -706,6 +803,7 @@
 		};
 		C8EAA7FB1B696E7800711A04 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3ADA8303B756BC5DD428733E /* Pods-SwiftAnyPicTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SwiftAnyPicTests/Info.plist;
@@ -718,6 +816,7 @@
 		};
 		C8EAA7FD1B696E7800711A04 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EFBD68A46F0134263588F19 /* Pods-SwiftAnyPicUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = SwiftAnyPicUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -730,6 +829,7 @@
 		};
 		C8EAA7FE1B696E7800711A04 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CEA41699D792626EE2D19DE /* Pods-SwiftAnyPicUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = SwiftAnyPicUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

@@ -29,7 +29,7 @@ class PAPWelcomeViewController: UIViewController, PAPLogInViewControllerDelegate
         
         // Refresh current user with server side data -- checks if user is still valid and so on
         _facebookResponseCount = 0
-        PFUser.currentUser()?.fetchInBackgroundWithTarget(self, selector: Selector("refreshCurrentUserCallbackWithResult:error:"))
+        PFUser.currentUser()?.fetchInBackgroundWithTarget(self, selector: #selector(PAPWelcomeViewController.refreshCurrentUserCallbackWithResult(_:error:)))
     }
 
     override func viewDidLoad() {
@@ -69,7 +69,7 @@ class PAPWelcomeViewController: UIViewController, PAPLogInViewControllerDelegate
     func processedFacebookResponse() {
         // Once we handled all necessary facebook batch responses, save everything necessary and continue
         synchronized(self) {
-            _facebookResponseCount++;
+            _facebookResponseCount += 1;
             if (_facebookResponseCount != _expectedFacebookResponseCount) {
                 return
             }
@@ -147,7 +147,7 @@ class PAPWelcomeViewController: UIViewController, PAPLogInViewControllerDelegate
                 // Logged in with FB
                 // Create batch request for all the stuff
                 let connection = FBRequestConnection()
-                self._expectedFacebookResponseCount++
+                self._expectedFacebookResponseCount += 1
                 connection.addRequest(FBRequest.requestForMe(), completionHandler: { (connection, result, error) in
                     if error != nil {
                         // Failed to fetch me data.. logout to be safe
@@ -164,7 +164,7 @@ class PAPWelcomeViewController: UIViewController, PAPLogInViewControllerDelegate
                 })
                 
                 // profile pic request
-                self._expectedFacebookResponseCount++
+                self._expectedFacebookResponseCount += 1
                 connection.addRequest(FBRequest(graphPath: "me", parameters: ["fields": "picture.width(500).height(500)"], HTTPMethod: "GET"), completionHandler: { (connection, result, error) in
                     if error == nil {
                         // result is a dictionary with the user's Facebook data
@@ -195,7 +195,7 @@ class PAPWelcomeViewController: UIViewController, PAPLogInViewControllerDelegate
                 })
                 if permissions.containsObject("user_friends") {
                     // Fetch FB Friends + me
-                    self._expectedFacebookResponseCount++
+                    self._expectedFacebookResponseCount += 1
                     connection.addRequest(FBRequest.requestForMyFriends(), completionHandler: { (connection, result, error) in
                         print("processing Facebook friends")
                         if error != nil {
@@ -229,7 +229,7 @@ class PAPWelcomeViewController: UIViewController, PAPLogInViewControllerDelegate
                 
                 PAPCache.sharedCache.clear()
                 currentParseUser.setObject("Someone", forKey: kPAPUserDisplayNameKey)
-                self._expectedFacebookResponseCount++
+                self._expectedFacebookResponseCount += 1
                 self.processedFacebookResponse()
             }
         }

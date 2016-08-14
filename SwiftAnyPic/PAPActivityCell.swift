@@ -36,7 +36,7 @@ class PAPActivityCell: PAPBaseTextCell {
         
         self.activityImageButton = UIButton(type: UIButtonType.Custom)
         self.activityImageButton!.backgroundColor = UIColor.clearColor()
-        self.activityImageButton!.addTarget(self, action: Selector("didTapActivityButton:"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.activityImageButton!.addTarget(self, action: #selector(PAPActivityCell.didTapActivityButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.mainView!.addSubview(self.activityImageButton!)
     }
 
@@ -209,7 +209,7 @@ class PAPActivityCell: PAPBaseTextCell {
     }
     
     func didTapActivityButton(sender: AnyObject) {
-        if self.delegate?.respondsToSelector(Selector("cell:didTapActivityButton:")) != nil {
+        if self.delegate?.respondsToSelector(#selector(PAPActivityCellDelegate.cell(_:didTapActivityButton:))) != nil {
             (self.delegate! as! PAPActivityCellDelegate).cell(self, didTapActivityButton: self.activity!)
         }
     }

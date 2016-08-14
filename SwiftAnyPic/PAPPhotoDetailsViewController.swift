@@ -67,11 +67,11 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
         commentTextField!.delegate = self
         self.tableView.tableFooterView = footerView
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("actionButtonAction:"))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(PAPPhotoDetailsViewController.actionButtonAction(_:)))
         
         // Register to be notified when the keyboard will be shown to scroll the view
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("userLikedOrUnlikedPhoto:"), name: PAPUtilityUserLikedUnlikedPhotoCallbackFinishedNotification, object: self.photo)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PAPPhotoDetailsViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PAPPhotoDetailsViewController.userLikedOrUnlikedPhoto(_:)), name: PAPUtilityUserLikedUnlikedPhotoCallbackFinishedNotification, object: self.photo)
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -197,7 +197,7 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
             MBProgressHUD.showHUDAddedTo(self.view.superview, animated: true)
             
             // If more than 5 seconds pass since we post a comment, stop waiting for the server to respond
-            let timer: NSTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("handleCommentTimeout:"), userInfo: ["comment": comment], repeats: false)
+            let timer: NSTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(PAPPhotoDetailsViewController.handleCommentTimeout(_:)), userInfo: ["comment": comment], repeats: false)
 
             comment.saveEventually { (succeeded, error) in
                 timer.invalidate()

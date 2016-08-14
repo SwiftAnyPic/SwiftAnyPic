@@ -28,7 +28,7 @@ class PAPFindFriendsCell: PFTableViewCell {
         self.avatarImageButton = UIButton(type: UIButtonType.Custom)
         self.avatarImageButton.backgroundColor = UIColor.clearColor()
         self.avatarImageButton.frame = CGRectMake(10.0, 14.0, 40.0, 40.0)
-        self.avatarImageButton.addTarget(self, action: Selector("didTapUserButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.avatarImageButton.addTarget(self, action: #selector(PAPFindFriendsCell.didTapUserButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.contentView.addSubview(self.avatarImageButton)
         
         self.nameButton = UIButton(type: UIButtonType.Custom)
@@ -37,7 +37,7 @@ class PAPFindFriendsCell: PFTableViewCell {
         self.nameButton.titleLabel!.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         self.nameButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         self.nameButton.setTitleColor(UIColor(red: 114.0/255.0, green: 114.0/255.0, blue: 114.0/255.0, alpha: 1.0), forState: UIControlState.Highlighted)
-        self.nameButton.addTarget(self, action: Selector("didTapUserButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.nameButton.addTarget(self, action: #selector(PAPFindFriendsCell.didTapUserButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.contentView.addSubview(self.nameButton)
         
         self.photoLabel = UILabel()
@@ -56,7 +56,7 @@ class PAPFindFriendsCell: PFTableViewCell {
         self.followButton.setTitle("Following", forState: UIControlState.Selected)
         self.followButton.setTitleColor(UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 50.0/255.0, alpha: 1.0), forState: UIControlState.Normal)
         self.followButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Selected)
-        self.followButton.addTarget(self, action: Selector("didTapFollowButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.followButton.addTarget(self, action: #selector(PAPFindFriendsCell.didTapFollowButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.contentView.addSubview(self.followButton)
     }
 
@@ -108,14 +108,14 @@ class PAPFindFriendsCell: PFTableViewCell {
 
     /* Inform delegate that a user image or name was tapped */
     func didTapUserButtonAction(sender: AnyObject) {
-        if self.delegate?.respondsToSelector(Selector("cell:didTapUserButton:")) != nil {
+        if self.delegate?.respondsToSelector(#selector(PAPFindFriendsCellDelegate.cell(_:didTapUserButton:))) != nil {
             self.delegate!.cell(self, didTapUserButton: self.user!)
         }    
     }
 
     /* Inform delegate that the follow button was tapped */
     func didTapFollowButtonAction(sender: AnyObject) {
-        if self.delegate?.respondsToSelector(Selector("cell:didTapFollowButton:")) != nil {
+        if self.delegate?.respondsToSelector(#selector(PAPFindFriendsCellDelegate.cell(_:didTapFollowButton:))) != nil {
             self.delegate!.cell(self, didTapFollowButton: self.user!)
         }        
     }

@@ -56,7 +56,7 @@ class PAPPhotoHeaderView: PFTableViewCell {
         
         self.avatarImageView = PAPProfileImageView()
         self.avatarImageView!.frame = CGRectMake(4.0, 4.0, 35.0, 35.0)
-        self.avatarImageView!.profileButton!.addTarget(self, action: Selector("didTapUserButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.avatarImageView!.profileButton!.addTarget(self, action: #selector(PAPPhotoHeaderView.didTapUserButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.containerView!.addSubview(self.avatarImageView!)
         
         if self.buttons.contains(PAPPhotoHeaderButtons.Comment) {
@@ -144,17 +144,17 @@ class PAPPhotoHeaderView: PFTableViewCell {
             var constrainWidth: CGFloat = containerView!.bounds.size.width
 
             if self.buttons.contains(PAPPhotoHeaderButtons.User) {
-                self.userButton!.addTarget(self, action: Selector("didTapUserButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+                self.userButton!.addTarget(self, action: #selector(PAPPhotoHeaderView.didTapUserButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             }
             
             if self.buttons.contains(PAPPhotoHeaderButtons.Comment) {
                 constrainWidth = self.commentButton!.frame.origin.x
-                self.commentButton!.addTarget(self, action: Selector("didTapCommentOnPhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+                self.commentButton!.addTarget(self, action: #selector(PAPPhotoHeaderView.didTapCommentOnPhotoButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             }
             
             if self.buttons.contains(PAPPhotoHeaderButtons.Like) {
                 constrainWidth = self.likeButton!.frame.origin.x
-                self.likeButton!.addTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+                self.likeButton!.addTarget(self, action: #selector(PAPPhotoHeaderView.didTapLikePhotoButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             }
             
             // we resize the button to fit the user's name to avoid having a huge touch area
@@ -192,9 +192,9 @@ class PAPPhotoHeaderView: PFTableViewCell {
 
     func shouldEnableLikeButton(enable: Bool) {
         if enable {
-            self.likeButton!.removeTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+            self.likeButton!.removeTarget(self, action: #selector(PAPPhotoHeaderView.didTapLikePhotoButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         } else {
-            self.likeButton!.addTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+            self.likeButton!.addTarget(self, action: #selector(PAPPhotoHeaderView.didTapLikePhotoButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         }
     }
     
@@ -208,19 +208,19 @@ class PAPPhotoHeaderView: PFTableViewCell {
     }
     
     func didTapUserButtonAction(sender: UIButton) {
-        if delegate != nil && delegate!.respondsToSelector(Selector("photoHeaderView:didTapUserButton:user:")) {
+        if delegate != nil && delegate!.respondsToSelector(#selector(PAPPhotoHeaderViewDelegate.photoHeaderView(_:didTapUserButton:user:))) {
             delegate!.photoHeaderView!(self, didTapUserButton: sender, user: self.photo![kPAPPhotoUserKey] as! PFUser)
         }
     }
     
     func didTapLikePhotoButtonAction(button: UIButton) {
-        if delegate != nil && delegate!.respondsToSelector(Selector("photoHeaderView:didTapLikePhotoButton:photo:")) {
+        if delegate != nil && delegate!.respondsToSelector(#selector(PAPPhotoHeaderViewDelegate.photoHeaderView(_:didTapLikePhotoButton:photo:))) {
             delegate!.photoHeaderView!(self, didTapLikePhotoButton: button, photo: self.photo!)
         }
     }
     
     func didTapCommentOnPhotoButtonAction(sender: UIButton) {
-        if delegate != nil && delegate!.respondsToSelector(Selector("photoHeaderView:didTapCommentOnPhotoButton:photo:")) {
+        if delegate != nil && delegate!.respondsToSelector(#selector(PAPPhotoHeaderViewDelegate.photoHeaderView(_:didTapCommentOnPhotoButton:photo:))) {
             delegate!.photoHeaderView!(self, didTapCommentOnPhotoButton: sender, photo: self.photo!)
         }
     }

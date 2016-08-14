@@ -96,7 +96,7 @@ class PAPBaseTextCell: PFTableViewCell {
         }
         self.nameButton!.titleLabel!.font = UIFont.boldSystemFontOfSize(13)
         self.nameButton!.titleLabel!.lineBreakMode = NSLineBreakMode.ByTruncatingTail
-        self.nameButton!.addTarget(self, action: Selector("didTapUserButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.nameButton!.addTarget(self, action: #selector(PAPBaseTextCell.didTapUserButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         mainView!.addSubview(self.nameButton!)
         
         self.contentLabel = UILabel()
@@ -120,7 +120,7 @@ class PAPBaseTextCell: PFTableViewCell {
         
         self.avatarImageButton = UIButton(type: UIButtonType.Custom)
         self.avatarImageButton!.backgroundColor = UIColor.clearColor()
-        self.avatarImageButton!.addTarget(self, action: Selector("didTapUserButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.avatarImageButton!.addTarget(self, action: #selector(PAPBaseTextCell.didTapUserButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
 
         mainView!.addSubview(self.avatarImageButton!)
         
@@ -177,7 +177,7 @@ class PAPBaseTextCell: PFTableViewCell {
 
     /* Inform delegate that a user image or name was tapped */
     func didTapUserButtonAction(sender: AnyObject) {
-        if self.delegate != nil && self.delegate!.respondsToSelector(Selector("cell:didTapUserButton:")) {
+        if self.delegate != nil && self.delegate!.respondsToSelector(#selector(PAPBaseTextCellDelegate.cell(_:didTapUserButton:))) {
             self.delegate!.cell(self, didTapUserButton: self.user!)
         }
     }

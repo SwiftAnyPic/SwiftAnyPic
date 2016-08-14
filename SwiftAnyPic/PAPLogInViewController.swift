@@ -68,8 +68,8 @@ class PAPLogInViewController: UIViewController, FBLoginViewDelegate {
 
     func handleFacebookSession() {
         if PFUser.currentUser() != nil {
-            if self.delegate != nil && self.delegate!.respondsToSelector(Selector("logInViewControllerDidLogUserIn:")) {
-                self.delegate!.performSelector(Selector("logInViewControllerDidLogUserIn:"), withObject: PFUser.currentUser()!)
+            if self.delegate != nil && self.delegate!.respondsToSelector(#selector(PAPLogInViewControllerDelegate.logInViewControllerDidLogUserIn(_:))) {
+                self.delegate!.performSelector(#selector(PAPLogInViewControllerDelegate.logInViewControllerDidLogUserIn(_:)), withObject: PFUser.currentUser()!)
             }
             return
         }
@@ -102,8 +102,8 @@ class PAPLogInViewController: UIViewController, FBLoginViewDelegate {
                 if error == nil {
                     self.hud!.removeFromSuperview()
                     if self.delegate != nil {
-                        if self.delegate!.respondsToSelector(Selector("logInViewControllerDidLogUserIn:")) {
-                        self.delegate!.performSelector(Selector("logInViewControllerDidLogUserIn:"), withObject: user)
+                        if self.delegate!.respondsToSelector(#selector(PAPLogInViewControllerDelegate.logInViewControllerDidLogUserIn(_:))) {
+                        self.delegate!.performSelector(#selector(PAPLogInViewControllerDelegate.logInViewControllerDidLogUserIn(_:)), withObject: user)
                         }
                     }
                 } else {

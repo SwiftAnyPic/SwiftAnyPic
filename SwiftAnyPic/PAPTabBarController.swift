@@ -33,10 +33,10 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
         cameraButton.frame = CGRectMake(94.0, 0.0, 131.0, self.tabBar.bounds.size.height)
         cameraButton.setImage(UIImage(named: "ButtonCamera.png"), forState: UIControlState.Normal)
         cameraButton.setImage(UIImage(named: "ButtonCameraSelected.png"), forState: UIControlState.Highlighted)
-        cameraButton.addTarget(self, action: Selector("photoCaptureButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        cameraButton.addTarget(self, action: #selector(PAPTabBarController.photoCaptureButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.tabBar.addSubview(cameraButton)
         
-        let swipeUpGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("handleGesture:"))
+        let swipeUpGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(PAPTabBarController.handleGesture(_:)))
         swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Up
         swipeUpGestureRecognizer.numberOfTouchesRequired = 1
         cameraButton.addGestureRecognizer(swipeUpGestureRecognizer)

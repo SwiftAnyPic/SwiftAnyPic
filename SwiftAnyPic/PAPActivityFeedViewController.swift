@@ -49,16 +49,16 @@ class PAPActivityFeedViewController: PFQueryTableViewController, PAPActivityCell
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "LogoNavigationBar.png"))
         
         // Add Settings button
-        self.navigationItem.rightBarButtonItem = PAPSettingsButtonItem(target: self, action: Selector("settingsButtonAction:"))
+        self.navigationItem.rightBarButtonItem = PAPSettingsButtonItem(target: self, action: #selector(PAPActivityFeedViewController.settingsButtonAction(_:)))
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("applicationDidReceiveRemoteNotification:"), name: PAPAppDelegateApplicationDidReceiveRemoteNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PAPActivityFeedViewController.applicationDidReceiveRemoteNotification(_:)), name: PAPAppDelegateApplicationDidReceiveRemoteNotification, object: nil)
         
         self.blankTimelineView = UIView(frame: self.tableView.bounds)
         
         let button = UIButton(type: UIButtonType.Custom)
         button.setBackgroundImage(UIImage(named: "ActivityFeedBlank.png"), forState: UIControlState.Normal)
         button.frame = CGRectMake(24.0, 113.0, 271.0, 140.0)
-        button.addTarget(self, action: Selector("inviteFriendsButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(PAPActivityFeedViewController.inviteFriendsButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.blankTimelineView!.addSubview(button)
         
         lastRefresh = NSUserDefaults.standardUserDefaults().objectForKey(kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey) as? NSDate
@@ -168,7 +168,7 @@ class PAPActivityFeedViewController: PFQueryTableViewController, PAPActivityCell
             var unreadCount: Int = 0
             for activity in self.objects as! [PFObject] {
                 if lastRefresh!.compare(activity.createdAt!) == NSComparisonResult.OrderedAscending && (activity.objectForKey(kPAPActivityTypeKey) as! String) != kPAPActivityTypeJoined {
-                    unreadCount++
+                    unreadCount += 1
                 }
             }
             

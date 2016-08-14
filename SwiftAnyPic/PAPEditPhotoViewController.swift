@@ -60,11 +60,11 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UIScrol
         self.navigationItem.hidesBackButton = true
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "LogoNavigationBar.png"))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelButtonAction:"))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Publish", style: UIBarButtonItemStyle.Done, target: self, action: Selector("doneButtonAction:"))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(PAPEditPhotoViewController.cancelButtonAction(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Publish", style: UIBarButtonItemStyle.Done, target: self, action: #selector(PAPEditPhotoViewController.doneButtonAction(_:)))
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PAPEditPhotoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PAPEditPhotoViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
 
         self.shouldUploadImage(self.image)
     }
